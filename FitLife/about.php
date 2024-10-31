@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>About - EstateAgency Bootstrap Template</title>
+  <title>About - FitLife</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
 
@@ -26,13 +26,6 @@
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: EstateAgency
-  * Template URL: https://bootstrapmade.com/real-estate-agency-bootstrap-template/
-  * Updated: Aug 09 2024 with Bootstrap v5.3.3
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
 </head>
 
 <body class="about-page">
@@ -48,25 +41,25 @@
 
       <nav id="navmenu" class="navmenu">
         <ul>
-          <li><a href="index.html">Home</a></li>
+          <li><a href="./index.php">Home</a></li>
           <li class="dropdown"><a href="#"><span>Profile</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
-              <li><a href="#">Registration</a></li>
+              <li><a href="./register.php">Registration</a></li>
               <li class="dropdown"><a href="#"><span>Login</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                 <ul>
-                  <li><a href="#">Member</a></li>
-                  <li><a href="#">Admin</a></li>
+                  <li><a href="./member.php">Member</a></li>
+                  <li><a href="./admin-login.php">Admin</a></li>
                 </ul>
               </li>
-              <li><a href="#">View Profile</a></li>
-              <li><a href="#">Edit Profile</a></li>
-              <li><a href="#">Logout</a></li>
+              <li><a href="./view.php">View Profile</a></li>
+              <li><a href="./edit-profile.php">Edit Profile</a></li>
+              <li><a href="./logout.php">Logout</a></li>
             </ul>
           </li>
-          <li><a href="shop.html">Shop</a></li>
-          <li><a href="about.html" class="active">About</a></li>
-          <li><a href="community.html">Community</a></li>
-          <li><a href="support.html">Support</a></li>
+          <li><a href="shop.php">Shop</a></li>
+          <li><a href="about.php" class="active">About</a></li>
+          <li><a href="community.php">Community</a></li>
+          <li><a href="support.php">Support</a></li>
         </ul>
       <!-- nav section -->
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
@@ -85,7 +78,7 @@
             <div class="col-lg-8">
               <h1>About</h1>
               <p class="mb-0">
-                FitLife is a web-based platform offering personalized workout and dietary plans to enhance overall well-being, simplifying fitness management with e-commerce for wellness items, workout planning, and nutritional tracking.
+                FitLife is a platform offering personalized workout and dietary plans to enhance overall well-being, simplifying fitness management with e-commerce for wellness items, workout planning, and nutritional tracking.
                 <br>
                 <br>
                 supports our users to achieve their fitness goals by offering personalised support</p>

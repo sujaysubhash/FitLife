@@ -50,7 +50,7 @@
         .result-container
         {
         display:flex;
-justify-content:center;
+        justify-content:center;
         }
        
         .bmi-result {
@@ -99,108 +99,140 @@ justify-content:center;
     </header>
 
     <?php
-    // PHP Code for Registration Form Handling
-    $nameErr = $emailErr = $passwordErr = $heightErr = $weightErr = "";
-    $name = $email = $password = $height = $weight = $category = "";
-    $bmi = $output = $alertClass = "";
-    $recommendations = "";
+        // PHP Code for Registration Form Handling
+        $nameErr = $emailErr = $passwordErr = $heightErr = $weightErr = $roleErr = $addressErr = $foodCategoryErr = "";
+        $name = $email = $password = $height = $weight = $category = $address = $role = $food_category = "";
+        $bmi = $output = $alertClass = "";
+        $recommendations = "";
 
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Validate name
-        if (empty($_POST["name"])) {
-            $nameErr = "Name is required";
-        } else {
-            $name = test_input($_POST["name"]);
-        }
-
-        // Validate email
-        if (empty($_POST["email"])) {
-            $emailErr = "Email is required";
-        } else {
-            $email = test_input($_POST["email"]);
-        }
-
-        // Validate password
-        if (empty($_POST["password"])) {
-            $passwordErr = "Password is required";
-        } else {
-            $password = test_input($_POST["password"]);
-        }
-
-        // Validate height
-        if (empty($_POST["height"])) {
-            $heightErr = "Height is required";
-        } else {
-            $height = test_input($_POST["height"]);
-        }
-
-        // Validate weight
-        if (empty($_POST["weight"])) {
-            $weightErr = "Weight is required";
-        } else {
-            $weight = test_input($_POST["weight"]);
-        }
-
-        // Calculate BMI if no errors
-        if (empty($nameErr) && empty($emailErr) && empty($passwordErr) && empty($heightErr) && empty($weightErr)) {
-            $mtheight = (float)$height / 100; // Convert height to meters
-            $bmi = (float)$weight / ($mtheight * $mtheight);
-
-            // Determine the weight status and recommendations
-            if ($bmi < 18.5) {
-                $output = "Under Weight";
-                $alertClass = "alert-danger";
-                $category = "Weight Training";
-                $recommendations = "Increase calorie intake with nutrient-dense foods: <ul>
-                    <li>Nuts and Nut Butters: Almonds, walnuts, and peanut butter.</li>
-                    <li>Whole Grains: Oats, quinoa, and brown rice.</li>
-                    <li>Dairy Products: Full-fat yogurt, cheese, and milk.</li>
-                    <li>Avocado: Packed with healthy fats.</li>
-                    <li>Protein Shakes: Add protein powders to smoothies.</li>
-                </ul>";
-            } elseif ($bmi < 24.9) {
-                $output = "Normal Weight";
-                $alertClass = "alert-success";
-                $category = "Weight Training";
-                $recommendations = "Maintain a balanced diet: <ul>
-                    <li>Fruits and Vegetables: A variety of colors.</li>
-                    <li>Lean Proteins: Chicken, fish, beans.</li>
-                    <li>Whole Grains: Brown rice, quinoa.</li>
-                    <li>Healthy Fats: Olive oil, avocados, fatty fish.</li>
-                    <li>Hydration: Plenty of water.</li>
-                </ul>";
-            } elseif ($bmi < 29.9) {
-                $output = "Over Weight";
-                $alertClass = "alert-warning";
-                $category = "Cardio with weight training";
-                $recommendations = "Focus on weight management: <ul>
-                    <li>Vegetables: Non-starchy options like spinach and broccoli.</li>
-                    <li>Lean Proteins: Skinless poultry, fish, legumes.</li>
-                    <li>Whole Grains: Opt for whole grains but watch portion sizes.</li>
-                    <li>Healthy Snacks: Nuts in moderation, Greek yogurt.</li>
-                    <li>Limit Sugary Drinks: Reduce soda and high-calorie beverages.</li>
-                </ul>";
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            // Validate name
+            if (empty($_POST["name"])) {
+                $nameErr = "Name is required";
             } else {
-                $output = "OBESE";
-                $alertClass = "alert-danger";
-                $category = "Cardio Workout";
-                $recommendations = "Focus on weight management: <ul>
-                    <li>Vegetables: Non-starchy veggies for low-calorie options.</li>
-                    <li>Lean Proteins: Tofu to promote satiety.</li>
-                    <li>Healthy Snacks: Greek yogurt, hummus with veggies.</li>
-                    <li>Limit Sugary Drinks: Reduce soda and high-calorie beverages.</li>
-                </ul>";
+                $name = test_input($_POST["name"]);
+            }
+        
+            // Validate email
+            if (empty($_POST["email"])) {
+                $emailErr = "Email is required";
+            } else {
+                $email = test_input($_POST["email"]);
+            }
+        
+            // Validate password
+            if (empty($_POST["password"])) {
+                $passwordErr = "Password is required";
+            } else {
+                $password = test_input($_POST["password"]);
+            }
+        
+            // Validate height
+            if (empty($_POST["height"])) {
+                $heightErr = "Height is required";
+            } else {
+                $height = test_input($_POST["height"]);
+            }
+        
+            // Validate weight
+            if (empty($_POST["weight"])) {
+                $weightErr = "Weight is required";
+            } else {
+                $weight = test_input($_POST["weight"]);
+            }
+        
+            // Validate role
+            if(empty($_POST['role'])){
+                $roleErr = "Role is required";
+            } else {
+                $role = test_input($_POST['role']);
+            }
+        
+            // Validate address
+            if(empty($_POST['address'])){
+                $addressErr = "Address is required";
+            } else {
+                $address = test_input($_POST['address']);
+            }
+        
+            // Validate food category
+            if(empty($_POST['food_category'])) {
+                $foodCategoryErr = "Food category is required";
+            } else {
+                $food_category = test_input($_POST['food_category']);
+            }
+        
+            // Calculate BMI if no errors
+            if (empty($nameErr) && empty($emailErr) && empty($passwordErr) && empty($heightErr) && empty($weightErr) && empty($foodCategoryErr)) {
+                $mtheight = (float)$height / 100; // Convert height to meters
+                $bmi = (float)$weight / ($mtheight * $mtheight);
+            
+                // Determine the weight status and recommendations
+                if ($bmi < 18.5) {
+                    $output = "Under Weight";
+                    $alertClass = "alert-danger";
+                    $category = "Weight Training";
+                    if ($food_category == "Veg") {
+                        $recommendations = "Increase calorie intake with nutrient-dense vegetarian foods: <ul>
+                            <li>Nuts and Nut Butters: Almonds, walnuts, and peanut butter.</li>
+                            <li>Whole Grains: Oats, quinoa, and brown rice.</li>
+                            <li>Dairy Products: Full-fat yogurt, cheese, and milk.</li>
+                            <li>Avocado: Packed with healthy fats.</li>
+                            <li>Protein Shakes: Add protein powders to smoothies.</li>
+                        </ul>";
+                    } else {
+                        $recommendations = "Increase calorie intake with nutrient-dense non-vegetarian foods: <ul>
+                            <li>Lean Meats: Chicken, turkey, and fish.</li>
+                            <li>Eggs: A great source of protein.</li>
+                            <li>Whole Grains: Oats, quinoa, and brown rice.</li>
+                            <li>Dairy Products: Full-fat yogurt, cheese, and milk.</li>
+                            <li>Protein Shakes: Add protein powders to smoothies.</li>
+                        </ul>";
+                    }
+                } elseif ($bmi < 24.9) {
+                    $output = "Normal Weight";
+                    $alertClass = "alert-success";
+                    $category = "Weight Training";
+                    $recommendations = "Maintain a balanced diet: <ul>
+                        <li>Fruits and Vegetables: A variety of colors.</li>
+                        <li>Lean Proteins: " . ($food_category == "Veg" ? "Beans, lentils, and tofu." : "Chicken, fish, and beans.") . "</li>
+                        <li>Whole Grains: Brown rice, quinoa.</li>
+                        <li>Healthy Fats: Olive oil, avocados, fatty fish.</li>
+                        <li>Hydration: Plenty of water.</li>
+                    </ul>";
+                } elseif ($bmi < 29.9) {
+                    $output = "Over Weight";
+                    $alertClass = "alert-warning";
+                    $category = "Cardio with weight training";
+                    $recommendations = "Focus on weight management: <ul>
+                        <li>Vegetables: Non-starchy options like spinach and broccoli.</li>
+                        <li>Lean Proteins: " . ($food_category == "Veg" ? "Legumes and tofu." : "Skinless poultry and fish.") . "</li>
+                        <li>Whole Grains: Opt for whole grains but watch portion sizes.</li>
+                        <li>Healthy Snacks: Nuts in moderation, Greek yogurt.</li>
+                        <li>Limit Sugary Drinks: Reduce soda and high-calorie beverages.</li>
+                    </ul>";
+                } else {
+                    $output = "OBESE";
+                    $alertClass = "alert-danger";
+                    $category = "Cardio Workout";
+                    $recommendations = "Focus on weight management: <ul>
+                        <li>Vegetables: Non-starchy veggies for low-calorie options.</li>
+                        <li>Lean Proteins: " . ($food_category == "Veg" ? "Tofu and legumes." : "Lean meats and fish.") . "</li>
+                        <li>Healthy Snacks: Greek yogurt, hummus with veggies.</li>
+                        <li>Limit Sugary Drinks: Reduce soda and high-calorie beverages.</li>
+                    </ul>";
+                }
             }
         }
-    }
 
-    function test_input($data) {
-        $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
-        return $data;
-    }
+        function test_input($data) {
+            $data = trim($data);
+            $data = stripslashes($data);
+            $data = htmlspecialchars($data);
+            return $data;
+        }
     ?>
+
 
    <!-- Registration Form Start -->
 <section class="register-area">
@@ -209,7 +241,8 @@ justify-content:center;
         <div class="join">
             <h1 class="join-head">Join FitLife</h1>
         </div>
-        <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+        
+        <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" >
             <div class="form-group">
                 <label for="name">Name:</label>
                 <input type="text" name="name" class="form-control" value="<?php echo $name;?>">
@@ -219,6 +252,16 @@ justify-content:center;
                 <label for="email">Email:</label>
                 <input type="email" name="email" class="form-control" value="<?php echo $email;?>">
                 <span class="error"><?php echo $emailErr;?></span>
+            </div>
+            <div class="form-group">
+                <label for="role">Role:</label>
+                <input type="text" name="role" class="form-control" value="<?php echo $role;?>">
+                <span class="error"><?php echo $roleErr;?></span>
+            </div>
+            <div class="form-group">
+                <label for="address">Address:</label>
+                <input type="text" name="address" class="form-control" value="<?php echo $address;?>">
+                <span class="error"><?php echo $addressErr;?></span>
             </div>
             <div class="form-group">
                 <label for="password">Password:</label>
@@ -242,8 +285,9 @@ justify-content:center;
                     <option value="Veg" <?php if (isset($food_category) && $food_category == "Veg") echo 'selected'; ?>>Veg</option>
                     <option value="Non-Veg" <?php if (isset($food_category) && $food_category == "Non-Veg") echo 'selected'; ?>>Non-Veg</option>
                 </select>
-                <br>
+                <span class="error"><?php echo $foodCategoryErr;?></span>
             </div>
+
             <div class="form-group">
                 <input type="submit" name="submit" value="Register" class="btn btn-primary">
             </div>

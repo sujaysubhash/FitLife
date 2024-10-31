@@ -47,7 +47,7 @@
                 <ul>
                   <li><a href="./member.php">Member</a></li>
                   <li><a href="./guest.php">Guest</a></li>
-                  <li><a href="./admin-login.php">Admin</a></li>
+                  <li><a href="#">Admin</a></li>
                 </ul>
               </li>
               <li><a href="#">View Profile</a></li>
@@ -67,73 +67,35 @@
     </div>
   </header>
 
-  <!-- main -->
-<main class="main">
-  <!-- Page Title -->
-  <div class="page-title" data-aos="fade">
-    <div class="heading">
-      <div class="container">
-        <div class="row d-flex justify-content-center text-center">
-          <div class="col-lg-8">
-            <h1>Admin Panel - Community Messages</h1>
-            <p class="mb-0">Send motivational messages and updates to the community</p>
-          </div>
+  <!-- Main Content -->
+  <main>
+    <main id="main" class="main">
+      <div class="container d-flex align-items-center justify-content-center " style="min-height: 80vh;">
+        <div class=" card p-4 shadow " style="max-width: 400px; width: 100%; margin-top: 12vh;">
+          <h2 class="text-center mb-4">Member Login</h2>
+          <form action="#" method="POST">
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" id="email" name="email" class="form-control" required>
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" id="password" name="password" class="form-control" required>
+            </div>
+            <div class="d-grid">
+              <button type="submit" class="btn btn-primary">Login</button>
+            </div>
+            <div class="mt-3 text-center">
+              <p>Don't have an account? <a href="register.php">Register here</a></p>
+            </div>
+          </form>
         </div>
       </div>
-    </div>
-  </div>
+    </main>
+  </main>
 
-  <!-- Admin Message Section -->
-  <section id="admin-messages" class="admin-messages section">
-    <div class="container">
-      <div class="row gy-4">
-        
-        <!-- Message Input Form -->
-        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-          <div class="admin-message-form">
-            <h3>Send a New Message</h3>
-            <form action="process-message.php" method="POST">
-              <div class="form-group mb-3">
-                <label for="message-title" class="form-label">Message Title</label>
-                <input type="text" id="message-title" name="title" class="form-control" placeholder="Enter message title" required>
-              </div>
-              <div class="form-group mb-3">
-                <label for="message-content" class="form-label">Message Content</label>
-                <textarea id="message-content" name="content" class="form-control" rows="5" placeholder="Type your message here..." required></textarea>
-              </div>
-              <button type="submit" class="btn btn-primary">Send Message</button>
-            </form>
-          </div>
-        </div><!-- End Message Input Form -->
-
-        <!-- Sent Messages Display -->
-        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
-          <div class="admin-message-list">
-            <h3>Previous Messages</h3>
-            <ul class="list-group">
-              <!-- Sample of messages, this section should be dynamically populated from the database -->
-              <li class="list-group-item">
-                <h5 class="mb-1">Stay Motivated!</h5>
-                <p class="mb-1">Remember, consistency is the key to achieving your fitness goals. Stay committed!</p>
-                <small>Sent on 2024-10-30</small>
-              </li>
-              <li class="list-group-item">
-                <h5 class="mb-1">Hydration Reminder</h5>
-                <p class="mb-1">Stay hydrated throughout the day to keep your energy levels up and body refreshed!</p>
-                <small>Sent on 2024-10-29</small>
-              </li>
-              <!-- End sample messages -->
-            </ul>
-          </div>
-        </div><!-- End Sent Messages Display -->
-
-      </div>
-    </div>
-  </section>
-</main>
-
-<!-- footer -->
-<footer id="footer" class="footer light-background">
+  <!-- Footer -->
+  <footer id="footer" class="footer light-background">
 
     <div class="container">
       <div class="row gy-3">

@@ -39,7 +39,7 @@
 
       <nav id="navmenu" class="navmenu">
         <ul>
-          <li><a href="index.php" class="active">Home</a></li>
+          <li><a href="index.html" class="active">Home</a></li>
           <li class="dropdown"><a href="#"><span>Profile</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
               <li><a href="register.php">Registration</a></li>
@@ -50,7 +50,7 @@
                   <li><a href="./admin-login.php">Admin</a></li>
                 </ul>
               </li>
-              <li><a href="#">View Profile</a></li>
+              <li><a href="./view.php">View Profile</a></li>
               <li><a href="edit-profile.php">Edit Profile</a></li>
               <li><a href="#">Logout</a></li>
             </ul>
@@ -67,73 +67,33 @@
     </div>
   </header>
 
-  <!-- main -->
-<main class="main">
-  <!-- Page Title -->
-  <div class="page-title" data-aos="fade">
-    <div class="heading">
-      <div class="container">
-        <div class="row d-flex justify-content-center text-center">
-          <div class="col-lg-8">
-            <h1>Admin Panel - Community Messages</h1>
-            <p class="mb-0">Send motivational messages and updates to the community</p>
-          </div>
+  <!-- Main Content -->
+  <main id="main" class="main">
+    <div class="container py-5" style="margin-top: 80px;">
+      <div class="profile-container card p-4 shadow" style="max-width: 600px; margin: auto;">
+        <h2 class="text-center mb-4">Your Profile</h2>
+        
+        <!-- Profile Information Section -->
+        <div class="profile-info">
+          <p><strong>Name:</strong> John Doe</p>
+          <p><strong>Email:</strong> johndoe@example.com</p>
+          <p><strong>Fitness Objective:</strong> Weight Loss</p>
+          <p><strong>BMI:</strong> 23.4</p>
+          <p><strong>Weight:</strong> 70 kg</p>
+          <p><strong>Height:</strong> 175 cm</p>
+          <p><strong>Dietary Restrictions:</strong> Vegetarian</p>
+        </div>
+
+        <!-- Edit Profile Link -->
+        <div class="text-center mt-4">
+          <a href="edit-profile.php" class="btn btn-primary">Edit Profile</a>
         </div>
       </div>
     </div>
-  </div>
-
-  <!-- Admin Message Section -->
-  <section id="admin-messages" class="admin-messages section">
-    <div class="container">
-      <div class="row gy-4">
-        
-        <!-- Message Input Form -->
-        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-          <div class="admin-message-form">
-            <h3>Send a New Message</h3>
-            <form action="process-message.php" method="POST">
-              <div class="form-group mb-3">
-                <label for="message-title" class="form-label">Message Title</label>
-                <input type="text" id="message-title" name="title" class="form-control" placeholder="Enter message title" required>
-              </div>
-              <div class="form-group mb-3">
-                <label for="message-content" class="form-label">Message Content</label>
-                <textarea id="message-content" name="content" class="form-control" rows="5" placeholder="Type your message here..." required></textarea>
-              </div>
-              <button type="submit" class="btn btn-primary">Send Message</button>
-            </form>
-          </div>
-        </div><!-- End Message Input Form -->
-
-        <!-- Sent Messages Display -->
-        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
-          <div class="admin-message-list">
-            <h3>Previous Messages</h3>
-            <ul class="list-group">
-              <!-- Sample of messages, this section should be dynamically populated from the database -->
-              <li class="list-group-item">
-                <h5 class="mb-1">Stay Motivated!</h5>
-                <p class="mb-1">Remember, consistency is the key to achieving your fitness goals. Stay committed!</p>
-                <small>Sent on 2024-10-30</small>
-              </li>
-              <li class="list-group-item">
-                <h5 class="mb-1">Hydration Reminder</h5>
-                <p class="mb-1">Stay hydrated throughout the day to keep your energy levels up and body refreshed!</p>
-                <small>Sent on 2024-10-29</small>
-              </li>
-              <!-- End sample messages -->
-            </ul>
-          </div>
-        </div><!-- End Sent Messages Display -->
-
-      </div>
-    </div>
-  </section>
-</main>
-
-<!-- footer -->
-<footer id="footer" class="footer light-background">
+  </main>
+  
+<!-- footer  -->
+  <footer id="footer" class="footer light-background">
 
     <div class="container">
       <div class="row gy-3">

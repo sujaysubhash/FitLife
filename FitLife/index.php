@@ -29,36 +29,35 @@
 </head>
 
 <body class="index-page">
-
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
-      <a href="index.html" class="logo d-flex align-items-center">
+      <a href="./index.php" class="logo d-flex align-items-center">
         <h1 class="sitename">Fit<span>Life</span></h1>
       </a>
 
       <nav id="navmenu" class="navmenu">
         <ul>
-          <li><a href="index.html" class="active">Home</a></li>
+          <li><a href="index.php" class="active">Home</a></li>
           <li class="dropdown"><a href="#"><span>Profile</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
               <li><a href="register.php">Registration</a></li>
               <li class="dropdown"><a href="#"><span>Login</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                 <ul>
-                  <li><a href="#">Member</a></li>
-                  <li><a href="#">Guest</a></li>
-                  <li><a href="#">Admin</a></li>
+                  <li><a href="./member.php">Member</a></li>
+                  <li><a href="./guest.php">Guest</a></li>
+                  <li><a href="./admin-login.php">Admin</a></li>
                 </ul>
               </li>
-              <li><a href="#">View Profile</a></li>
-              <li><a href="#">Edit Profile</a></li>
-              <li><a href="#">Logout</a></li>
+              <li><a href="./view.php">View Profile</a></li>
+              <li><a href="edit-profile.php">Edit Profile</a></li>
+              <li><a href="./logout.php">Logout</a></li>
             </ul>
           </li>
-          <li><a href="shop.html">Shop</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="community.html">Community</a></li>
-          <li><a href="support.html">Support</a></li>
+          <li><a href="shop.php">Shop</a></li>
+          <li><a href="about.php">About</a></li>
+          <li><a href="community.php">Community</a></li>
+          <li><a href="support.php">Support</a></li>
         </ul>
 
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
@@ -90,7 +89,7 @@
             <div>
               <p>FitLife</p>
               <h2><span>Strengthen your body,</span>Empower your mind!</h2>
-              <a href="property-single.html" class="btn-get-started">Join | Be Fit</a>
+              <a href="register.php" class="btn-get-started">Join | Be Fit</a>
             </div>
           </div>
         </div><!-- End Carousel Item -->
@@ -101,7 +100,7 @@
             <div>
               <p>FitLife</p>
               <h2><span>Break barriers,</span>Become unstoppable!</h2>
-              <a href="property-single.html" class="btn-get-started">Join | Be Fit</a>
+              <a href="register.php" class="btn-get-started">Join | Be Fit</a>
             </div>
           </div>
         </div><!-- End Carousel Item -->
@@ -150,7 +149,7 @@
               <div class="icon">
                 <i class="bi bi-broadcast"></i>
               </div>
-              <a href="service-details.html" class="stretched-link">
+              <a href="" class="stretched-link">
                 <h3>Instant Expert Suppport</h3>
               </a>
               <p>Real world , Real time support and assitance from Certified Trainers and Nutritionists</p>
@@ -162,7 +161,7 @@
               <div class="icon">
                 <i class="bi bi-easel"></i>
               </div>
-              <a href="service-details.html" class="stretched-link">
+              <a href="" class="stretched-link">
                 <h3>User Profiles & Goal Setting</h3>
               </a>
               <p>
@@ -175,12 +174,12 @@
               <div class="icon">
                 <i class="bi bi-bounding-box-circles"></i>
               </div>
-              <a href="service-details.html" class="stretched-link">
+              <a href="" class="stretched-link">
                 <h3>BMI Modification</h3>
               </a>
               <p>
                 FitLife allows users to update their BMI or health data, automatically adjusting their workout and diet plans to match the new health status.</p>
-              <a href="service-details.html" class="stretched-link"></a>
+              <a href="" class="stretched-link"></a>
             </div>
           </div><!-- End Service Item -->
 
@@ -189,11 +188,11 @@
               <div class="icon">
                 <i class="bi bi-calendar4-week"></i>
               </div>
-              <a href="service-details.html" class="stretched-link">
+              <a href="" class="stretched-link">
                 <h3>E-Commerce For Wellness products</h3>
               </a>
               <p>FitLife allows direct purchase of wellness products with real-time stock status and order confirmations.</p>
-              <a href="service-details.html" class="stretched-link"></a>
+              <a href="" class="stretched-link"></a>
             </div>
           </div><!-- End Service Item -->
 
@@ -202,11 +201,11 @@
               <div class="icon">
                 <i class="bi bi-chat-square-text"></i>
               </div>
-              <a href="service-details.html" class="stretched-link">
+              <a href="" class="stretched-link">
                 <h3>Community Support</h3>
               </a>
               <p>Offers expert guidance in a community forum, Experts provide advices to maintain an educational and motivating community.</p>
-              <a href="service-details.html" class="stretched-link"></a>
+              <a href="" class="stretched-link"></a>
             </div>
           </div><!-- End Service Item -->
 
@@ -283,128 +282,7 @@
 
     </section><!-- /Agents Section -->
 
-    <!-- Testimonials Section -->
-    <section id="testimonials" class="testimonials section">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Testimonials</h2>
-        <p>What Our Users Say...</p>
-      </div><!-- End Section Title -->
-
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="swiper init-swiper">
-          <script type="application/json" class="swiper-config">
-            {
-              "loop": true,
-              "speed": 600,
-              "autoplay": {
-                "delay": 5000
-              },
-              "slidesPerView": "auto",
-              "pagination": {
-                "el": ".swiper-pagination",
-                "type": "bullets",
-                "clickable": true
-              },
-              "breakpoints": {
-                "320": {
-                  "slidesPerView": 1,
-                  "spaceBetween": 40
-                },
-                "1200": {
-                  "slidesPerView": 3,
-                  "spaceBetween": 1
-                }
-              }
-            }
-          </script>
-          <div class="swiper-wrapper">
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <div class="stars">
-                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                </div>
-                <p>"FitLife transformed my fitness routine with easy-to-follow plans and great support!" </p>
-                <div class="profile mt-auto">
-                  <img src="assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
-                  <h3>Saul Goodman</h3>
-                  <h4>Ceo &amp; Founder</h4>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <div class="stars">
-                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                </div>
-                <p> "I love how FitLife updates my workout routines automatically as my BMI changes. It keeps me on track and motivated!</p>
-                <div class="profile mt-auto">
-                  <img src="assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
-                  <h3>Sara Wilsson</h3>
-                  <h4>Designer</h4>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <div class="stars">
-                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                </div>
-                <p>
-                  "The community and expert advice on FitLife keep me motivated and informative."
-                </p>
-                <div class="profile mt-auto">
-                  <img src="assets/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
-                  <h3>Jena Karlis</h3>
-                  <h4>Store Owner</h4>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <div class="stars">
-                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                </div>
-                <p>
-                  "Tracking my fitness goals has never been easier. FitLife is a fantastic tool for anyone serious about health."
-                </p>
-                <div class="profile mt-auto">
-                  <img src="assets/img/testimonials/testimonials-4.jpg" class="testimonial-img" alt="">
-                  <h3>Matt Brandon</h3>
-                  <h4>Freelancer</h4>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <div class="stars">
-                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                </div>
-                <p>
-                  "The BMI modification feature on FitLife is fantastic—it adjusts my workout plans based on my progress!" 
-                </p>
-                <div class="profile mt-auto">
-                  <img src="assets/img/testimonials/testimonials-5.jpg" class="testimonial-img" alt="">
-                  <h3>John Larson</h3>
-                  <h4>Entrepreneur</h4>
-                </div>
-              </div>
-            </div><!-- End testimonial item -->
-
-          </div>
-          <div class="swiper-pagination"></div>
-        </div>
-
-      </div>
-
-    </section><!-- /Testimonials Section -->
+    
 
   </main>
 
