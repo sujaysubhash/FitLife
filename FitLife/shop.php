@@ -41,7 +41,7 @@
       <nav id="navmenu" class="navmenu">
         <ul>
           <li><a href="index.php">Home</a></li>
-          <li class="dropdown"><a href="#"><span>Profile</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+          <li class="dropdown"><a href="./register.php"><span>Profile</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
               <li><a href="./register.php">Registration</a></li>
               <li class="dropdown"><a href="#"><span>Login</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
@@ -101,7 +101,7 @@
               <img src="assets/img/properties/oats.webp" alt="" class="img-fluid">
               <div class="card-body">
                 <span class="sale-rent">Price | 299</span>
-                <h3><a href="property-single.html" class="stretched-link">MuscleBlaze Fit High Protein Oats (Dark Chocolate, 400g)</a></h3>
+                <h3><a href="product-detail.php?id=1" class="stretched-link">MuscleBlaze Fit High Protein Oats (Dark Chocolate, 400g)</a></h3>
                 <div class="card-content d-flex flex-column justify-content-center text-center">
                   <div class="row propery-info">
                     <div class="col">Brand</div>
@@ -125,7 +125,7 @@
               <img src="assets/img/properties/fish-oil.jpg" alt="" class="img-fluid">
               <div class="card-body">
                 <span class="sale-rent">Price | 359</span>
-                <h3><a href="property-single.html" class="stretched-link">MuscleBlaze Omega 3 Fish Oil Gold</a></h3>
+                <h3><a href="product-detail.php?id=2"  class="stretched-link">MuscleBlaze Omega 3 Fish Oil Gold</a></h3>
                 <div class="card-content d-flex flex-column justify-content-center text-center">
                   <div class="row propery-info">
                     <div class="col">Brand</div>
@@ -149,7 +149,7 @@
               <img src="assets/img/properties/Wellcore.jpg" alt="" class="img-fluid">
               <div class="card-body">
                 <span class="sale-rent">Price | 1299</span>
-                <h3><a href="property-single.html" class="stretched-link">Wellcore-Pure Micronised Creatine Monohydrate Powder</a></h3>
+                <h3><a href="product-detail.php?id=3" class="stretched-link">Wellcore-Pure Micronised Creatine Monohydrate Powder</a></h3>
                 <div class="card-content d-flex flex-column justify-content-center text-center">
                   <div class="row propery-info">
                     <div class="col">Brand</div>
@@ -173,7 +173,7 @@
               <img src="assets/img/properties/dumbel.jpg" alt="" class="img-fluid">
               <div class="card-body">
                 <span class="sale-rent">Price | 6100</span>
-                <h3><a href="property-single.html" class="stretched-link">Lifelong Adjustable Dumbbell for Home Gym</a></h3>
+                <h3><a href="product-detail.php?id=4" class="stretched-link">Lifelong Adjustable Dumbbell for Home Gym</a></h3>
                 <div class="card-content d-flex flex-column justify-content-center text-center">
                   <div class="row propery-info">
                     <div class="col">Brand</div>
@@ -197,7 +197,7 @@
               <img src="assets/img/properties/pushupeq.jpg" alt="" class="img-fluid">
               <div class="card-body">
                 <span class="sale-rent">Price | 399</span>
-                <h3><a href="property-single.html" class="stretched-link">Bodyband Pushup Board</a></h3>
+                <h3><a href="product-detail.php?id=5" class="stretched-link">Bodyband Pushup Board</a></h3>
                 <div class="card-content d-flex flex-column justify-content-center text-center">
                   <div class="row propery-info">
                     <div class="col">Brand</div>
@@ -221,7 +221,7 @@
               <img src="assets/img/properties/newDumbel.jpg" alt="" class="img-fluid">
               <div class="card-body">
                 <span class="sale-rent">Price | 397</span>
-                <h3><a href="property-single.html" class="stretched-link">Star X PRO PVC weight 10kg with Dummbell rod</a></h3>
+                <h3><a href="product-detail.php?id=6" class="stretched-link">Star X PRO PVC weight 10kg with Dummbell rod</a></h3>
                 <div class="card-content d-flex flex-column justify-content-center text-center">
                   <div class="row propery-info">
                     <div class="col">Brand</div>
@@ -246,7 +246,7 @@
               <img src="assets/img/properties/gainer.jpg" alt="" class="img-fluid">
               <div class="card-body">
                 <span class="sale-rent">Price | 2,899</span>
-                <h3><a href="property-single.html" class="stretched-link">MuscleBlaze Super Gainer XXL Muscle Mass High Protein Gainer</a></h3>
+                <h3><a href="product-detail.php?id=7" class="stretched-link">MuscleBlaze Super Gainer XXL Muscle Mass High Protein Gainer</a></h3>
                 <div class="card-content d-flex flex-column justify-content-center text-center">
                   <div class="row propery-info">
                     <div class="col">Brand</div>
@@ -271,7 +271,7 @@
               <img src="assets/img/properties/shaker1.jpg" alt="" class="img-fluid">
               <div class="card-body">
                 <span class="sale-rent">Offer | 398</span>
-                <h3><a href="property-single.html" class="stretched-link">Boldfit Gym Shaker Pro Cyclone Shaker Bottle</a></h3>
+                <h3><a href="product-detail.php?id=8" class="stretched-link">Boldfit Gym Shaker Pro Cyclone Shaker Bottle</a></h3>
                 <div class="card-content d-flex flex-column justify-content-center text-center">
                   <div class="row propery-info">
                     <div class="col">Brand</div>
@@ -295,7 +295,7 @@
               <img src="assets/img/properties/whey-protein.jpg" alt="" class="img-fluid">
               <div class="card-body">
                 <span class="sale-rent">Price | 2,219</span>
-                <h3><a href="property-single.html" class="stretched-link">Optimum Nutrition Gold Whey Protein Powder for Muscle Support & Recovery</a></h3>
+                <h3><a href="product-detail.php?id=9" class="stretched-link">Optimum Nutrition Gold Whey Protein Powder for Muscle Support & Recovery</a></h3>
                 <div class="card-content d-flex flex-column justify-content-center text-center">
                   <div class="row propery-info">
                     <div class="col">Brand</div>
@@ -319,7 +319,7 @@
               <img src="assets/img/properties/shaker.jpg" alt="" class="img-fluid">
               <div class="card-body">
                 <span class="sale-rent">Offer | 279</span>
-                <h3><a href="property-single.html" class="stretched-link">Boldfit Bold Gym Shaker Bottle 700ml Shaker</a></h3>
+                <h3><a href="product-detail.php?id=10" class="stretched-link">Boldfit Bold Gym Shaker Bottle 700ml Shaker</a></h3>
                 <div class="card-content d-flex flex-column justify-content-center text-center">
                   <div class="row propery-info">
                     <div class="col">Brand</div>
@@ -341,10 +341,10 @@
 
           <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
             <div class="card">
-              <img src="assets/img/properties/creatine.webp" alt="" class="img-fluid">
+              <img src="./assets/img/properties/creatine2.webp" alt="" class="img-fluid">
               <div class="card-body">
                 <span class="sale-rent">Price | 1199</span>
-                <h3><a href="property-single.html" class="stretched-link">Creatine HCl Pre workout Supplement Creatine</a></h3>
+                <h3><a href="product-detail.php?id=11" class="stretched-link">Creatine HCl Pre workout Supplement Creatine</a></h3>
                 <div class="card-content d-flex flex-column justify-content-center text-center">
                   <div class="row propery-info">
                     <div class="col">Brand</div>
@@ -368,7 +368,7 @@
               <img src="assets/img/properties/yoga mats.jpg" alt="" class="img-fluid">
               <div class="card-body">
                 <span class="sale-rent">Offer | 649</span>
-                <h3><a href="property-single.html" class="stretched-link">LiveEZ Anti-Skid Yoga Mat  with Carry Bag (10mm)</a></h3>
+                <h3><a href="product-detail.php?id=12" class="stretched-link">LiveEZ Anti-Skid Yoga Mat  with Carry Bag (10mm)</a></h3>
                 <div class="card-content d-flex flex-column justify-content-center text-center">
                   <div class="row propery-info">
                     <div class="col">Brand</div>
@@ -390,8 +390,7 @@
         </div>
 
       </div>
-
-    </section><!-- /Real Estate Section -->
+    </section>
 
   </main>
 

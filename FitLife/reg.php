@@ -7,7 +7,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
         $password = $_POST['password'];
         $role = $_POST['role'];
         $address = $_POST['address'];
-
+        
         $servername = "localhost";
         $username = "root";
         $password = "";

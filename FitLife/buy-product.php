@@ -25,19 +25,26 @@
 
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
+  <style>
+    .form-group
+    {
+      margin-block-end:1.5rem;
+    }
 
+  </style>
 </head>
 
 <body class="index-page">
-
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center">
+
+      <a href="./index.php" class="logo d-flex align-items-center">
         <h1 class="sitename">Fit<span>Life</span></h1>
       </a>
+
       <nav id="navmenu" class="navmenu">
         <ul>
-          <li><a href="index.php" class="active">Home</a></li>
+          <li><a href="index.php">Home</a></li>
           <li class="dropdown"><a href="#"><span>Profile</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
               <li><a href="register.php">Registration</a></li>
@@ -48,12 +55,12 @@
                   <li><a href="./admin-login.php">Admin</a></li>
                 </ul>
               </li>
-              <li><a href="#">View Profile</a></li>
+              <li><a href="./view.php">View Profile</a></li>
               <li><a href="edit-profile.php">Edit Profile</a></li>
-              <li><a href="#">Logout</a></li>
+              <li><a href="./logout.php">Logout</a></li>
             </ul>
           </li>
-          <li><a href="shop.php">Shop</a></li>
+          <li><a href="shop.php" class="active">Shop</a></li>
           <li><a href="about.php">About</a></li>
           <li><a href="community.php">Community</a></li>
           <li><a href="support.php">Support</a></li>
@@ -61,32 +68,63 @@
 
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
-
     </div>
   </header>
+<!--end header -->
 
-<main id="main" class="main">
-    <div class="container py-5" style="margin-top: 80px;">
-      <div class="logout-container card p-4 shadow" style="max-width: 600px; margin: auto;">
-        <h2 class="text-center mb-4">You have been logged out</h2>
-        
-        <!-- Logout Confirmation Message -->
-        <p class="text-center">Thank you for visiting FitLife! You have successfully logged out.</p>
-        
-        <!-- Redirect Options -->
-        <div class="text-center mt-4">
-          <a href="index.php" class="btn btn-primary">Go to Homepage</a>
-          <a href="member.php" class="btn btn-secondary">Login Again</a>
-        </div>
-      </div>
-    </div>
-  </main>
+<main style ="margin-block-start: 50px;">
+    <section class="register-area">
+            <div class="container">
+                <div class="join">
+                    <h1 class=" join-head text-center">Order Summary</h1>
+                </div>
+                <form method="POST" action="./ordered.php" onsubmit="return validateForm()">
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input id="name" type="text" name="name" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input id="email" type="email" name="email" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone:</label>
+                        <input id="phone" type="number" name="phone" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address:</label>
+                        <input id="address" type="text" name="address" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="pincode">Pincode:</label>
+                        <input id="pincode" type="number" name="pincode" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="housenumber">House Number:</label>
+                        <input id="housenumber" type="number" name="housenumber" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="landmark">Landmark:</label>
+                        <input id="landmark" type="text" name="landmark" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="addresstype">Address Type:</label>
+                        <select name="addresstype" class="form-control">
+                            <option value="">Select</option>
+                            <option value="Home" >Home</option>
+                            <option value="Work" >Work</option>
+                        </select>
+                    </div>
+                    <div>
+                        <input type="submit" name="submit" value="Place Order" class="btn btn-primary">
+                    </div>
+                </form>
+            </div>
+    </section>
+</main>
 
-
-
-<!-- footer  -->
+<!-- footer section -->
 <footer id="footer" class="footer light-background">
-
 <div class="container">
   <div class="row gy-3">
     <div class="col-lg-3 col-md-6 d-flex">
@@ -151,8 +189,56 @@
 <!-- Preloader -->
 <div id="preloader"></div>
 
+<!-- Form validation -->
+<script>
+    function validateForm()
+      {
+         let name = document.getElementById('name').value;
+         let email = document.getElementById('email').value;
+         let phone = document.getElementById('phone').value;
+         let address = document.getElementById('address').value;
+         let pincode = document.getElementById('pincode').value;
+         let housenumber = document.getElementById('housenumber').value;
+         let landmark = document.getElementById('landmark').value;
+
+         if(name === "" || email === "" || phone === "" || address === "" || pincode === "" || housenumber === "" || landmark === "")
+            {
+              alert("All the fields must be filled out");
+              return false;
+            }
+          const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+         if(!emailPattern.test(email))
+            {
+              alert("Please enter a valid email address.");
+              return false;
+            }
+           const phonePattern =  /^\d{10}$/;
+          if(!phonePattern.test(phone))
+            {
+              alert("Please enter a valid phone number having 10 digits.");
+              return false;
+            }
+          const pincodePattern =  /^\d{6}$/;
+          if(!pincodePattern.test(pincode))
+            {
+              alert("Enter a valid pincode");
+              return false;
+            }
+          if(isNaN(housenumber))
+            {
+              alert("House number must be a numeric value");
+              return false;
+            }
+          
+          // if the all the inputs are valid
+          return true;
+          
+      }
+
+</script>
+
 <!-- Vendor JS Files -->
-<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></scrip>
 <script src="assets/vendor/php-email-form/validate.js"></script>
 <script src="assets/vendor/aos/aos.js"></script>
 <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>

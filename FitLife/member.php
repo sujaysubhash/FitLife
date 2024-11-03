@@ -27,9 +27,7 @@
   <link href="assets/css/main.css" rel="stylesheet">
 
 </head>
-
 <body class="index-page">
-
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
@@ -170,7 +168,5 @@
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
-
 </body>
-
 </html>

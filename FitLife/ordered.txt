@@ -1,0 +1,8 @@
+<p><strong>Product Name:</strong> <?php echo $productName; ?></p>
+<p><strong>Quantity:</strong> <?php echo $quantity; ?></p>
+<p><strong>Total Amount:</strong> $<?php echo $totalAmount; ?></p>
+<p><strong>Order ID:</strong> <?php echo $orderID; ?></p>
+<p><strong>Shipping Address:</strong></p>
+<p><?php echo $userName; ?></p>
+<p><?php echo $address; ?></p>
+<p><?php echo $city . ', ' . $state . ', ' . $zip; ?></p>

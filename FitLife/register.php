@@ -78,7 +78,6 @@
 </head>
 
 <body class="register-page">
-
     <header id="header" class="header d-flex align-items-center fixed-top">
         <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
             <a href="index.php" class="logo d-flex align-items-center">
@@ -241,7 +240,6 @@
         <div class="join">
             <h1 class="join-head">Join FitLife</h1>
         </div>
-        
         <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" >
             <div class="form-group">
                 <label for="name">Name:</label>
@@ -284,11 +282,9 @@
                     <option value="">Select</option>
                     <option value="Veg" <?php if (isset($food_category) && $food_category == "Veg") echo 'selected'; ?>>Veg</option>
                     <option value="Non-Veg" <?php if (isset($food_category) && $food_category == "Non-Veg") echo 'selected'; ?>>Non-Veg</option>
-                </select>
-                <span class="error"><?php echo $foodCategoryErr;?></span>
-            </div>
-
+                </select> 
             <div class="form-group">
+                <br>
                 <input type="submit" name="submit" value="Register" class="btn btn-primary">
             </div>
         </form>

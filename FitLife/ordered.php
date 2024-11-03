@@ -25,7 +25,26 @@
 
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
-
+  <style>
+    body {
+            background-color: #f8f9fa;
+        }
+        .content-container {
+            margin-top: 50px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .success-message {
+            color: var(--accent-color);
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .order-details {
+            margin-top: 20px;
+        }
+  </style>
 </head>
 
 <body class="index-page">
@@ -48,9 +67,9 @@
                   <li><a href="./admin-login.php">Admin</a></li>
                 </ul>
               </li>
-              <li><a href="#">View Profile</a></li>
+              <li><a href="./view.php">View Profile</a></li>
               <li><a href="edit-profile.php">Edit Profile</a></li>
-              <li><a href="#">Logout</a></li>
+              <li><a href="./logout.php">Logout</a></li>
             </ul>
           </li>
           <li><a href="shop.php">Shop</a></li>
@@ -65,26 +84,37 @@
     </div>
   </header>
 
-<main id="main" class="main">
-    <div class="container py-5" style="margin-top: 80px;">
-      <div class="logout-container card p-4 shadow" style="max-width: 600px; margin: auto;">
-        <h2 class="text-center mb-4">You have been logged out</h2>
-        
-        <!-- Logout Confirmation Message -->
-        <p class="text-center">Thank you for visiting FitLife! You have successfully logged out.</p>
-        
-        <!-- Redirect Options -->
-        <div class="text-center mt-4">
-          <a href="index.php" class="btn btn-primary">Go to Homepage</a>
-          <a href="member.php" class="btn btn-secondary">Login Again</a>
+  <!-- main -->
+<main>
+    <div class="content-container container" style="margin-top:8rem; margin-bottom:3rem;">
+        <div>
+            <h1 class="success-message">Order Placed Successfully!</h1>
+            <p>Thankyou for your order! Your order has been placed successfully</p>
         </div>
-      </div>
+        <div>
+            <h4>Order Details:</h4>
+            <div class="order-details">
+                <p><strong>Product Name:</strong>[product name]</p>
+                <p><strong>Quantity:</strong>[product quantity]</p>
+                <p><strong>Total Amount:</strong>$[amount]</p>
+                <p><strong>Order ID:</strong>[order id]</p>
+                <p><strong>Shipping Address:</strong></p>
+                <p>[User name]</p>
+                <p>[Address]</p>
+                <p>[City, State, Pin]</p>
+            </div>
+        <div class="text-center">
+            <a href="index.php" class="btn btn-primary">Return to Home</a>
+            <a href="shop.php" class="btn btn-secondary">Continue Shopping</a>
+        </div>
     </div>
-  </main>
 
+    </div>
+</main>
 
+<!-- end main -->
 
-<!-- footer  -->
+<!-- footer -->
 <footer id="footer" class="footer light-background">
 
 <div class="container">
@@ -144,7 +174,6 @@
 </div>
 
 </footer>
-
 <!-- Scroll Top -->
 <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
@@ -160,7 +189,5 @@
 
 <!-- Main JS File -->
 <script src="assets/js/main.js"></script>
-
 </body>
-
 </html>

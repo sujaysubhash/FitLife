@@ -92,7 +92,7 @@
         <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
           <div class="admin-message-form">
             <h3>Send a New Message</h3>
-            <form action="process-message.php" method="POST">
+          <form action="process-message.php" method="POST">
               <div class="form-group mb-3">
                 <label for="message-title" class="form-label">Message Title</label>
                 <input type="text" id="message-title" name="title" class="form-control" placeholder="Enter message title" required>
@@ -102,7 +102,7 @@
                 <textarea id="message-content" name="content" class="form-control" rows="5" placeholder="Type your message here..." required></textarea>
               </div>
               <button type="submit" class="btn btn-primary">Send Message</button>
-            </form>
+          </form>
           </div>
         </div><!-- End Message Input Form -->
 
