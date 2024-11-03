@@ -230,7 +230,7 @@
 
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
             <div class="member">
-              <div class="pic"><img src="assets/img/team/Partner1.jpg" class="img-fluid" alt=""></div>
+              <div class="pic" style="height:65vh;"><img src="./assets/img/sujay.jpg" class="img-fluid" alt=""></div>
               <div class="member-info">
                 <h4>Sujay Subhash</h4>
                 <span>Fitness Expert</span>
@@ -246,7 +246,7 @@
 
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
             <div class="member">
-              <div class="pic"><img src="assets/img/team/Trainer.jpg" class="img-fluid" alt=""></div>
+              <div class="pic" style="height:60vh;"><img src="./assets/img/trainer (1).jpg" class="img-fluid" alt=""></div>
               <div class="member-info">
                 <h4>Certified Fitness Trainer</h4>
                 <span>Rince Raphel</span>
@@ -262,7 +262,7 @@
 
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
             <div class="member">
-              <div class="pic"><img src="assets/img/team/Partner1.jpg" class="img-fluid" alt=""></div>
+              <div class="pic" style="height:65vh"><img src="./assets/img/anand.jpg" class="img-fluid" alt=""></div>
               <div class="member-info">
                 <h4>Anand Unnikrishnan</h4>
                 <span>Nutritionist<br></span>
