@@ -41,7 +41,11 @@
           <li><a href="index.php" class="active">Home</a></li>
           <li class="dropdown"><a href="#"><span>Profile</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
-              <li><a href="register.php">Registration</a></li>
+              <li class="dropdown"><a href=""><span>Registration</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                <ul>
+                  <li><a href="./register.php">Member</a></li>
+                  <li><a href="./guest-register.php">Guest</a></li>
+                </ul>
               <li class="dropdown"><a href="#"><span>Login</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                 <ul>
                   <li><a href="./member.php">Member</a></li>
@@ -59,7 +63,6 @@
           <li><a href="community.php">Community</a></li>
           <li><a href="support.php">Support</a></li>
         </ul>
-
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
 
@@ -78,7 +81,7 @@
           <div class="carousel-container">
             <div>
               <h2>Push beyond limits<br>and <span>shape your destiny!</span></h2>
-              <a href="#" class="btn-get-started">Join | Be Fit</a>
+              <a href="./register.php" class="btn-get-started">Join | Be Fit</a>
             </div>
           </div>
         </div><!-- End Carousel Item -->

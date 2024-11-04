@@ -99,10 +99,11 @@
 
     <?php
         // PHP Code for Registration Form Handling
-        $nameErr = $emailErr = $passwordErr = $heightErr = $weightErr = $roleErr = $addressErr = $foodCategoryErr = "";
-        $name = $email = $password = $height = $weight = $category = $address = $role = $food_category = "";
+        $nameErr = $emailErr = $passwordErr = $heightErr = $weightErr  = $addressErr = $foodCategoryErr = "";
+        $name = $email = $password = $height = $weight = $category = $address  = $food_category = "";
         $bmi = $output = $alertClass = "";
         $recommendations = "";
+        $isRegistered = false;
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Validate name
@@ -138,13 +139,6 @@
                 $weightErr = "Weight is required";
             } else {
                 $weight = test_input($_POST["weight"]);
-            }
-        
-            // Validate role
-            if(empty($_POST['role'])){
-                $roleErr = "Role is required";
-            } else {
-                $role = test_input($_POST['role']);
             }
         
             // Validate address
@@ -230,6 +224,7 @@
             $data = htmlspecialchars($data);
             return $data;
         }
+
     ?>
 
 
@@ -250,11 +245,6 @@
                 <label for="email">Email:</label>
                 <input type="email" name="email" class="form-control" value="<?php echo $email;?>">
                 <span class="error"><?php echo $emailErr;?></span>
-            </div>
-            <div class="form-group">
-                <label for="role">Role:</label>
-                <input type="text" name="role" class="form-control" value="<?php echo $role;?>">
-                <span class="error"><?php echo $roleErr;?></span>
             </div>
             <div class="form-group">
                 <label for="address">Address:</label>
@@ -300,6 +290,9 @@
                 <div><?php echo $recommendations; ?></div>
                </div>
             </div>
+            <div class="alert alert-success text-center" style="margin-block-start:3rem">
+                    Registered Sucessfully!
+               </div>
         <?php endif; ?>
     </div>
 </section>

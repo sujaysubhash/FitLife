@@ -46,8 +46,12 @@
         <ul>
           <li><a href="index.php">Home</a></li>
           <li class="dropdown"><a href="#"><span>Profile</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-            <ul>
-              <li><a href="register.php">Registration</a></li>
+          <ul>
+              <li class="dropdown"><a href="#"><span>Registration</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                <ul>
+                  <li><a href="./register.php">Member</a></li>
+                  <li><a href="./guest-register.php">Guest</a></li>
+                </ul>
               <li class="dropdown"><a href="#"><span>Login</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                 <ul>
                   <li><a href="./member.php">Member</a></li>
@@ -60,7 +64,7 @@
               <li><a href="./logout.php">Logout</a></li>
             </ul>
           </li>
-          <li><a href="shop.php" class="active">Shop</a></li>
+          <li><a href="shop.php">Shop</a></li>
           <li><a href="about.php">About</a></li>
           <li><a href="community.php">Community</a></li>
           <li><a href="support.php">Support</a></li>

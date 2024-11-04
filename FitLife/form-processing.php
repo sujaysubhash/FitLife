@@ -61,9 +61,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $alertClass = "alert-danger";
         }
 
-        // Store user information (in a database, for example)
-        // Here you would typically add code to insert user details into a database
-        // For now, we're just simulating the output on the screen.
         echo "<div class='$alertClass'>Your BMI is " . number_format($bmi, 2) . " and you are classified as: $output</div>";
     }
 }

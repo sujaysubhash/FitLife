@@ -33,9 +33,7 @@
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
-      <a href="index.html" class="logo d-flex align-items-center">
-        <!-- Uncomment the line below if you also wish to use an image logo -->
-        <!-- <img src="assets/img/logo.png" alt=""> -->
+      <a href="index.php" class="logo d-flex align-items-center">
         <h1 class="sitename">Fit<span>Life</span></h1>
       </a>
 
@@ -43,28 +41,32 @@
         <ul>
           <li><a href="./index.php">Home</a></li>
           <li class="dropdown"><a href="#"><span>Profile</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-            <ul>
-              <li><a href="./register.php">Registration</a></li>
+          <ul>
+              <li class="dropdown"><a href="#"><span>Registration</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                <ul>
+                  <li><a href="./register.php">Member</a></li>
+                  <li><a href="./guest-register.php">Guest</a></li>
+                </ul>
               <li class="dropdown"><a href="#"><span>Login</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                 <ul>
                   <li><a href="./member.php">Member</a></li>
+                  <li><a href="./guest.php">Guest</a></li>
                   <li><a href="./admin-login.php">Admin</a></li>
                 </ul>
               </li>
               <li><a href="./view.php">View Profile</a></li>
-              <li><a href="./edit-profile.php">Edit Profile</a></li>
+              <li><a href="edit-profile.php">Edit Profile</a></li>
               <li><a href="./logout.php">Logout</a></li>
             </ul>
           </li>
           <li><a href="shop.php">Shop</a></li>
-          <li><a href="about.php" class="active">About</a></li>
+          <li><a href="about.php">About</a></li>
           <li><a href="community.php">Community</a></li>
           <li><a href="support.php">Support</a></li>
         </ul>
       <!-- nav section -->
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
-
     </div>
   </header>
 

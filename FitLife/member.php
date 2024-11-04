@@ -28,45 +28,26 @@
 
 </head>
 <body class="index-page">
-  <header id="header" class="header d-flex align-items-center fixed-top">
-    <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
-
-      <a href="index.html" class="logo d-flex align-items-center">
-        <h1 class="sitename">Fit<span>Life</span></h1>
-      </a>
-
-      <nav id="navmenu" class="navmenu">
-        <ul>
-          <li><a href="index.php" class="active">Home</a></li>
-          <li class="dropdown"><a href="#"><span>Profile</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-            <ul>
-              <li><a href="register.php">Registration</a></li>
-              <li class="dropdown"><a href="#"><span>Login</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-                <ul>
-                  <li><a href="./member.php">Member</a></li>
-                  <li><a href="./guest.php">Guest</a></li>
-                  <li><a href="#">Admin</a></li>
-                </ul>
-              </li>
-              <li><a href="#">View Profile</a></li>
-              <li><a href="edit-profile.php">Edit Profile</a></li>
-              <li><a href="#">Logout</a></li>
-            </ul>
-          </li>
-          <li><a href="shop.html">Shop</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="community.html">Community</a></li>
-          <li><a href="support.html">Support</a></li>
-        </ul>
-
-        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-      </nav>
-
-    </div>
-  </header>
+<header id="header" class="header d-flex align-items-center fixed-top">
+          <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+              <a href="index.php" class="logo d-flex align-items-center">
+                  <h1 class="sitename">Fit<span>Life</span></h1>
+              </a>
+              <nav id="navmenu" class="navmenu">
+                  <ul>
+                      <li><a href="index.php">Home</a></li>
+                      <li><a href="shop.php">Shop</a></li>
+                      <li><a href="about.php">About</a></li>
+                      <li><a href="community.php">Community</a></li>
+                      <li><a href="suppliers.php">Suppliers</a></li>
+                      <li><a href="support.php">Support</a></li>
+                  </ul>
+                  <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+              </nav>
+          </div>
+      </header>
 
   <!-- Main Content -->
-  <main>
     <main id="main" class="main">
       <div class="container d-flex align-items-center justify-content-center " style="min-height: 80vh;">
         <div class=" card p-4 shadow " style="max-width: 400px; width: 100%; margin-top: 12vh;">
@@ -90,7 +71,6 @@
         </div>
       </div>
     </main>
-  </main>
 
   <!-- Footer -->
   <footer id="footer" class="footer light-background">

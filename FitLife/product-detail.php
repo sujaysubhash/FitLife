@@ -32,42 +32,24 @@
 
 </head>
 <body class="index-page">
-  <header id="header" class="header d-flex align-items-center fixed-top">
-    <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
-
-      <a href="./index.php" class="logo d-flex align-items-center">
-        <h1 class="sitename">Fit<span>Life</span></h1>
-      </a>
-
-      <nav id="navmenu" class="navmenu">
-        <ul>
-          <li><a href="index.php" class="active">Home</a></li>
-          <li class="dropdown"><a href="#"><span>Profile</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-            <ul>
-              <li><a href="register.php">Registration</a></li>
-              <li class="dropdown"><a href="#"><span>Login</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-                <ul>
-                  <li><a href="./member.php">Member</a></li>
-                  <li><a href="./guest.php">Guest</a></li>
-                  <li><a href="./admin-login.php">Admin</a></li>
-                </ul>
-              </li>
-              <li><a href="./view.php">View Profile</a></li>
-              <li><a href="edit-profile.php">Edit Profile</a></li>
-              <li><a href="./logout.php">Logout</a></li>
-            </ul>
-          </li>
-          <li><a href="shop.php">Shop</a></li>
-          <li><a href="about.php">About</a></li>
-          <li><a href="community.php">Community</a></li>
-          <li><a href="support.php">Support</a></li>
-        </ul>
-
-        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-      </nav>
-
-    </div>
-  </header>
+<header id="header" class="header d-flex align-items-center fixed-top">
+          <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+              <a href="index.php" class="logo d-flex align-items-center">
+                  <h1 class="sitename">Fit<span>Life</span></h1>
+              </a>
+              <nav id="navmenu" class="navmenu">
+                  <ul>
+                      <li><a href="index.php">Home</a></li>
+                      <li><a href="shop.php">Shop</a></li>
+                      <li><a href="about.php">About</a></li>
+                      <li><a href="community.php">Community</a></li>
+                      <li><a href="suppliers.php">Suppliers</a></li>
+                      <li><a href="support.php">Support</a></li>
+                  </ul>
+                  <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+              </nav>
+          </div>
+      </header>
 
 <!-- main section-->
   <main id="product-detail" class="container" style="margin-block:10vh;">
@@ -82,7 +64,7 @@
         <p id="productDetails">Details</p>
         <div class="d-flex justify-content-center gap-5 p-5">
             <button id="buyNowButton" type="button" style="background:var(--accent-color)" class="text-light fw-bold btn px-5 py-4 px-4">Buy Now</button>
-            <button type="button" style="background:var(--accent-color)" class="text-light fw-bold btn px-5 py-4 px-4 ">Rate Product</button>
+            <button id="rateProductButton" type="button" style="background:var(--accent-color)" class="text-light fw-bold btn px-5 py-4 px-4">Rate Product</button>
         </div>
       </div>
     </div>  
@@ -166,7 +148,7 @@
             price: "1199",
             description: "Pre-workout creatine supplement for enhanced performance.",
             details: "Brand: Prosupps | Type: Creatine | Flavor: Unflavored | Weight: 90g",
-            image: "assets/img/properties/creatine.jpg"
+            image: "./assets/img/properties/creatine2.webp"
         },
         12: {
             name: "LiveEZ Anti-Skid Yoga Mat with Carry Bag (10mm)",
@@ -196,6 +178,10 @@
     document.getElementById('buyNowButton').addEventListener("click", function() {
         window.location.href = "buy-product.php";
     });
+    //Script to rate products 
+    document.getElementById('rateProductButton').addEventListener("click", function(){
+        window.location.href = "rate-product.php"
+    })
   </script>
 
 <footer id="footer" class="footer light-background">
