@@ -96,8 +96,22 @@
             </nav>
         </div>
     </header>
+<?php
+// Database connection
+$servername = "localhost";
+$username = "admin"; 
+$password = "admin"; 
+$dbname = "fitlife"; 
 
-    <?php
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error)
+{
+    die("Connection failed: " . $conn->connect_error);
+}
+
         // PHP Code for Registration Form Handling
         $nameErr = $emailErr = $passwordErr = $heightErr = $weightErr  = $addressErr = $foodCategoryErr = "";
         $name = $email = $password = $height = $weight = $category = $address  = $food_category = "";
@@ -112,54 +126,54 @@
             } else {
                 $name = test_input($_POST["name"]);
             }
-        
+       
             // Validate email
             if (empty($_POST["email"])) {
                 $emailErr = "Email is required";
             } else {
                 $email = test_input($_POST["email"]);
             }
-        
+       
             // Validate password
             if (empty($_POST["password"])) {
                 $passwordErr = "Password is required";
             } else {
                 $password = test_input($_POST["password"]);
             }
-        
+       
             // Validate height
             if (empty($_POST["height"])) {
                 $heightErr = "Height is required";
             } else {
                 $height = test_input($_POST["height"]);
             }
-        
+       
             // Validate weight
             if (empty($_POST["weight"])) {
                 $weightErr = "Weight is required";
             } else {
                 $weight = test_input($_POST["weight"]);
             }
-        
+       
             // Validate address
             if(empty($_POST['address'])){
                 $addressErr = "Address is required";
             } else {
                 $address = test_input($_POST['address']);
             }
-        
+       
             // Validate food category
             if(empty($_POST['food_category'])) {
                 $foodCategoryErr = "Food category is required";
             } else {
                 $food_category = test_input($_POST['food_category']);
             }
-        
+       
             // Calculate BMI if no errors
             if (empty($nameErr) && empty($emailErr) && empty($passwordErr) && empty($heightErr) && empty($weightErr) && empty($foodCategoryErr)) {
                 $mtheight = (float)$height / 100; // Convert height to meters
                 $bmi = (float)$weight / ($mtheight * $mtheight);
-            
+           
                 // Determine the weight status and recommendations
                 if ($bmi < 18.5) {
                     $output = "Under Weight";
@@ -215,6 +229,19 @@
                         <li>Limit Sugary Drinks: Reduce soda and high-calorie beverages.</li>
                     </ul>";
                 }
+               
+                $stmt = $conn->prepare("INSERT INTO userdetails (role, name, email, password, address) VALUES (?, ?, ?, ?, ?)");
+        $role = "user"; // Assuming all registered users are regular users
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        $stmt->bind_param("sssss", $role, $name, $email, $password, $address);
+       
+        if ($stmt->execute()) {
+            $isRegistered = true;
+        } else {
+            echo "Error: " . $stmt->error;
+        }
+
+        $stmt->close(); // Close prepared statement
             }
         }
 
@@ -272,7 +299,7 @@
                     <option value="">Select</option>
                     <option value="Veg" <?php if (isset($food_category) && $food_category == "Veg") echo 'selected'; ?>>Veg</option>
                     <option value="Non-Veg" <?php if (isset($food_category) && $food_category == "Non-Veg") echo 'selected'; ?>>Non-Veg</option>
-                </select> 
+                </select>
             <div class="form-group">
                 <br>
                 <input type="submit" name="submit" value="Register" class="btn btn-primary">

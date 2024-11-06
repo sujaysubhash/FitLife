@@ -47,6 +47,59 @@
           </div>
       </header>
 
+  <?php
+
+$servername = "localhost";
+$username = "admin"; 
+$password = "admin"; 
+$dbname = "fitlife"; 
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$isloged = false;
+// Check if the form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $email = $_POST["email"];
+    $password = $_POST["password"];
+    $role = "Member";  // Assuming default role is 'Member'
+    
+    // Hash the password for security
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+    
+    // Check if the email already exists
+    $checkUser = $conn->prepare("SELECT Email FROM login_details WHERE Email = ?");
+    $checkUser->bind_param("s", $email);
+    $checkUser->execute();
+    $checkUser->store_result();
+    
+    if ($checkUser->num_rows > 0) {
+        echo "User already exists!";
+    } else {
+        // Insert new login data
+        $stmt = $conn->prepare("INSERT INTO login_details (Email, Password, Role) VALUES (?, ?, ?)");
+        $stmt->bind_param("sss", $email, $hashedPassword, $role);
+        
+        if ($stmt->execute()) {
+            echo "Login information saved successfully.";
+            $isloged = true;
+            
+        } else {
+            echo "Error: " . $stmt->error;
+        }
+        
+        $stmt->close();
+    }
+    $checkUser->close();
+}
+
+$conn->close();
+
+?>
   <!-- Main Content -->
     <main id="main" class="main">
       <div class="container d-flex align-items-center justify-content-center " style="min-height: 80vh;">
@@ -68,6 +121,11 @@
               <p>Don't have an account? <a href="register.php">Register here</a></p>
             </div>
           </form>
+          <?php if ($isloged): ?>
+            <div class="alert alert-success mt-4 text-center ">
+                Logged Successfully!
+            </div>
+            <?php endif; ?>
         </div>
       </div>
     </main>

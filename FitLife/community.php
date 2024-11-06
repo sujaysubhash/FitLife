@@ -1,3 +1,27 @@
+<?php
+// Database connection
+$servername = "localhost";
+$username = "admin"; 
+$password = "admin"; 
+$dbname = "fitlife"; 
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error)
+{
+    die("Connection failed: " . $conn->connect_error);
+}
+else
+  {
+    $query = "SELECT content FROM admin_messages ORDER BY sent_date DESC LIMIT 1";
+    $result = mysqli_query($conn, $query);
+  }
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -80,7 +104,23 @@
           <div class="row d-flex justify-content-center text-center">
             <div class="col-lg-8">
               <h1>Community</h1>
-              <p class="mb-0">message from the admin</p>
+
+              <?php
+                  if(mysqli_num_rows($result) > 0)
+                    {
+                      while($row = mysqli_fetch_assoc($result))
+                        {
+                          echo "<p>".htmlspecialchars($row['content'])."<p>";
+                        }
+                    }
+                  else
+                    {
+                       echo "<p>No Message Found..</p>";
+                    }
+                  
+                    mysqli_close($conn);
+              ?>
+
             </div>
           </div>
         </div>

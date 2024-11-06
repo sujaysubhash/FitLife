@@ -1,3 +1,40 @@
+<?php
+// Database connection
+$servername = "localhost";
+$username = "admin"; 
+$password = "admin"; 
+$dbname = "fitlife"; 
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error)
+{
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Handle form submission to insert new messages
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['title'], $_POST['content'])) {
+    $title = mysqli_real_escape_string($conn, $_POST['title']);
+    $content = mysqli_real_escape_string($conn, $_POST['content']);
+    $sent_date = date("Y-m-d H:i:s"); // Current date and time
+
+    // Insert the message into the database
+    $query = "INSERT INTO admin_messages (title, content, sent_date) VALUES ('$title', '$content', '$sent_date')";
+    if (mysqli_query($conn, $query)) {
+        $message = "Message sent successfully!";
+    } else {
+        $message = "Error sending message: " . mysqli_error($conn);
+    }
+}
+
+// Fetch all messages from the database
+$query = "SELECT * FROM admin_messages ORDER BY sent_date DESC";
+$result = mysqli_query($conn, $query);
+$messages = mysqli_fetch_all($result, MYSQLI_ASSOC);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,24 +76,11 @@
 
       <nav id="navmenu" class="navmenu">
         <ul>
-          <li><a href="index.php" >Home</a></li>
+          <li><a href="index.php">Home</a></li>
           <li class="dropdown"><a href="#"><span>Profile</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
           <ul>
-              <li class="dropdown"><a href="#"><span>Registration</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-                <ul>
-                  <li><a href="./register.php">Member</a></li>
-                  <li><a href="./guest-register.php">Guest</a></li>
-                </ul>
-              <li class="dropdown"><a href="#"><span>Login</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-                <ul>
-                  <li><a href="./member.php">Member</a></li>
-                  <li><a href="./guest.php">Guest</a></li>
-                  <li><a href="./admin-login.php">Admin</a></li>
-                </ul>
-              </li>
-              <li><a href="./view.php">View Profile</a></li>
-              <li><a href="edit-profile.php">Edit Profile</a></li>
-              <li><a href="./logout.php">Logout</a></li>
+              <li><a href="./register.php">Member</a></li>
+              <li><a href="./guest-register.php">Guest</a></li>
             </ul>
           </li>
           <li><a href="shop.php">Shop</a></li>
@@ -72,73 +96,77 @@
   </header>
 
   <!-- main -->
-<main class="main">
-  <!-- Page Title -->
-  <div class="page-title" data-aos="fade">
-    <div class="heading">
-      <div class="container">
-        <div class="row d-flex justify-content-center text-center">
-          <div class="col-lg-8">
-            <h1>Admin Panel - Community Messages</h1>
-            <p class="mb-0">Send motivational messages and updates to the community</p>
+  <main class="main">
+    <div class="page-title" data-aos="fade">
+      <div class="heading">
+        <div class="container">
+          <div class="row d-flex justify-content-center text-center">
+            <div class="col-lg-8">
+              <h1>Admin Panel - Community Messages</h1>
+              <p class="mb-0">Send motivational messages and updates to the community</p>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- Admin Message Section -->
-  <section id="admin-messages" class="admin-messages section">
-    <div class="container">
-      <div class="row gy-4">
-        
-        <!-- Message Input Form -->
-        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-          <div class="admin-message-form">
-            <h3>Send a New Message</h3>
-          <form action="process-message.php" method="POST">
-              <div class="form-group mb-3">
-                <label for="message-title" class="form-label">Message Title</label>
-                <input type="text" id="message-title" name="title" class="form-control" placeholder="Enter message title" required>
-              </div>
-              <div class="form-group mb-3">
-                <label for="message-content" class="form-label">Message Content</label>
-                <textarea id="message-content" name="content" class="form-control" rows="5" placeholder="Type your message here..." required></textarea>
-              </div>
-              <button type="submit" class="btn btn-primary">Send Message</button>
-          </form>
-          </div>
-        </div><!-- End Message Input Form -->
+    <!-- Admin Message Section -->
+    <section id="admin-messages" class="admin-messages section">
+      <div class="container">
+        <div class="row gy-4">
+       
+          <!-- Message Input Form -->
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="admin-message-form">
+              <h3>Send a New Message</h3>
+              <?php
+                if (isset($message)) {
+                    echo "<div class='alert alert-info'>$message</div>";
+                }
+              ?>
+              <form action="admin.php" method="POST">
+                  <div class="form-group mb-3">
+                    <label for="message-title" class="form-label">Message Title</label>
+                    <input type="text" id="message-title" name="title" class="form-control" placeholder="Enter message title" required>
+                  </div>
+                  <div class="form-group mb-3">
+                    <label for="message-content" class="form-label">Message Content</label>
+                    <textarea id="message-content" name="content" class="form-control" rows="5" placeholder="Type your message here..." required></textarea>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Send Message</button>
+              </form>
+            </div>
+          </div><!-- End Message Input Form -->
 
-        <!-- Sent Messages Display -->
-        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
-          <div class="admin-message-list">
-            <h3>Previous Messages</h3>
-            <ul class="list-group">
-              <!-- Sample of messages, this section should be dynamically populated from the database -->
-              <li class="list-group-item">
-                <h5 class="mb-1">Stay Motivated!</h5>
-                <p class="mb-1">Remember, consistency is the key to achieving your fitness goals. Stay committed!</p>
-                <small>Sent on 2024-10-30</small>
-              </li>
-              <li class="list-group-item">
-                <h5 class="mb-1">Hydration Reminder</h5>
-                <p class="mb-1">Stay hydrated throughout the day to keep your energy levels up and body refreshed!</p>
-                <small>Sent on 2024-10-29</small>
-              </li>
-              <!-- End sample messages -->
-            </ul>
-          </div>
-        </div><!-- End Sent Messages Display -->
+          <!-- Sent Messages Display -->
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="admin-message-list">
+              <h3>Previous Messages</h3>
+              <ul class="list-group">
+                <?php
+                  if ($messages) {
+                      foreach ($messages as $message) {
+                          echo "<li class='list-group-item'>
+                                  <h5 class='mb-1'>" . htmlspecialchars($message['title']) . "</h5>
+                                  <p class='mb-1'>" . htmlspecialchars($message['content']) . "</p>
+                                  <small>Sent on " . $message['sent_date'] . "</small>
+                                </li>";
+                      }
+                  } else {
+                      echo "<li class='list-group-item'>No messages found.</li>";
+                  }
+                ?>
+              </ul>
+            </div>
+          </div><!-- End Sent Messages Display -->
 
+        </div>
       </div>
-    </div>
-  </section>
-</main>
+    </section>
+  </main>
 
-<!-- footer -->
-<footer id="footer" class="footer light-background">
-
+  <!-- footer -->
+  <footer id="footer" class="footer light-background">
     <div class="container">
       <div class="row gy-3">
         <div class="col-lg-3 col-md-6 d-flex">
@@ -147,9 +175,7 @@
             <h4>Address</h4>
             <p>56H5+F7W, North Paravur</p>
             <p>Kerala, 683513</p>
-            <p></p>
           </div>
-
         </div>
 
         <div class="col-lg-3 col-md-6 d-flex">
@@ -190,18 +216,13 @@
     <div class="container copyright text-center mt-4">
       <p>© <span>Copyright</span> <strong class="px-1 sitename">FitLife</strong> <span>All Rights Reserved</span></p>
       <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
         Designed by <a href="#">Team FitLife</a>
       </div>
     </div>
-
   </footer>
 
   <!-- Scroll Top -->
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-  <!-- Preloader -->
-  <div id="preloader"></div>
 
   <!-- Vendor JS Files -->
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

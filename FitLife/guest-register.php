@@ -98,6 +98,22 @@
     </header>
 
 <?php
+// Database connection
+$servername = "localhost";
+$username = "admin"; 
+$password = "admin"; 
+$dbname = "fitlife"; 
+
+// Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+    if ($conn->connect_error)
+    {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+
     // PHP Code for Registration Form Handling
     $nameErr = $emailErr = $passwordErr = $addressErr = "";
     $name = $email = $password = $address = "";
@@ -136,6 +152,18 @@
         if (empty($nameErr) && empty($emailErr) && empty($passwordErr) && empty($addressErr)) {
             $isRegistered = true; // Set success flag
         }
+
+        $stmt = $conn->prepare("INSERT INTO userdetails (role, name, email, password, address) VALUES (?, ?, ?, ?, ?)");
+        $role = "guest"; 
+        $stmt->bind_param("sssss", $role, $name, $email, $password, $address);
+       
+        if ($stmt->execute()) {
+            $isRegistered = true;
+        } else {
+            echo "Error: " . $stmt->error;
+        }
+
+        $stmt->close(); // Close prepared statement
     }
 
     function test_input($data) {

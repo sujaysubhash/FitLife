@@ -48,6 +48,23 @@
               </nav>
           </div>
       </header>
+<?php
+    $servername = "localhost";
+    $username = "admin"; 
+    $password = "admin"; 
+    $dbname = "fitlife"; 
+    
+    // Create connection
+        $conn = new mysqli($servername, $username, $password, $dbname);
+    
+    // Check connection
+        if ($conn->connect_error)
+        {
+            die("Connection failed: " . $conn->connect_error);
+        }
+
+        $query = 'SELECT name, email,'
+?>
 
   <!-- Main Content -->
   <main id="main" class="main">

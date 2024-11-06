@@ -71,20 +71,88 @@
     </div>
   </header>
 
+  <?php
+$servername = "localhost";
+$username = "admin"; 
+$password = "admin"; 
+$dbname = "fitlife"; 
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Define variables and initialize with empty values
+$email = $password = "";
+$emailErr = $passwordErr = "";
+
+// Check if the form was submitted
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (empty($_POST['email'])) {
+        $emailErr = "Enter your email address";
+    } else {
+        $email = test_input($_POST['email']);
+    }
+
+    if (empty($_POST['password'])) {
+        $passwordErr = "Enter your password";
+    } else {
+        $password = test_input($_POST['password']);
+    }
+
+    // Sanitize and validate inputs
+    function test_input($data) {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+    }
+
+    // Check if there are no errors
+    if (empty($emailErr) && empty($passwordErr)) {
+        $role = "Admin"; // Set role to Admin, you can adjust based on form input
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT); // Hash the password
+
+        // Prepare the insert statement
+        $stmt = $conn->prepare("INSERT INTO login_details (Email, Password, Role) VALUES (?, ?, ?)");
+        if ($stmt === false) {
+            die("Error in preparing statement: " . $conn->error);
+        }
+        $stmt->bind_param("sss", $email, $hashedPassword, $role);
+
+        if ($stmt->execute()) {
+            echo "<p>Registration successful!</p>";
+        } else {
+            echo "<p>Error: " . $stmt->error . "</p>";
+        }
+
+        $stmt->close(); // Close prepared statement
+    }
+}
+$conn->close();  // Close database connection
+?>
+
+
   <!-- Main Content -->
   <main>
     <main id="main" class="main">
       <div class="container d-flex align-items-center justify-content-center " style="min-height: 80vh;">
         <div class=" card p-4 shadow " style="max-width: 400px; width: 100%; margin-top: 12vh;">
           <h2 class="text-center mb-4">Admin Login</h2>
-          <form action="#" method="POST">
+          
+          <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
             <div class="mb-3">
               <label for="email" class="form-label">Email</label>
-              <input type="email" id="email" name="email" class="form-control" required>
+              <input type="email" name="email" class="form-control" value="<?php echo $email; ?>">
+                <span class="error"><?php echo $emailErr; ?></span>
             </div>
             <div class="mb-3">
               <label for="password" class="form-label">Password</label>
-              <input type="password" id="password" name="password" class="form-control" required>
+              <input type="password" name="password" class="form-control" value="<?php echo $password; ?>">
+                <span class="error"><?php echo $passwordErr; ?></span>
             </div>
             <div class="d-grid">
               <button type="submit" class="btn btn-primary">Login</button>
