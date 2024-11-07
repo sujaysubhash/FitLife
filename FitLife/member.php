@@ -46,89 +46,89 @@
               </nav>
           </div>
       </header>
-
-  <?php
-
+      
+<?php
+session_start(); // Start a session to store user data after login
+// Database connection
 $servername = "localhost";
-$username = "admin"; 
-$password = "admin"; 
-$dbname = "fitlife"; 
+$username = "admin";
+$password = "admin";
+$dbname = "fitlife";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
+$email = $password = "";
+$emailErr = $passwordErr = "";
 
-$isloged = false;
-// Check if the form is submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = $_POST["email"];
-    $password = $_POST["password"];
-    $role = "Member";  // Assuming default role is 'Member'
-    
-    // Hash the password for security
-    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-    
-    // Check if the email already exists
-    $checkUser = $conn->prepare("SELECT Email FROM login_details WHERE Email = ?");
-    $checkUser->bind_param("s", $email);
-    $checkUser->execute();
-    $checkUser->store_result();
-    
-    if ($checkUser->num_rows > 0) {
-        echo "User already exists!";
-    } else {
-        // Insert new login data
-        $stmt = $conn->prepare("INSERT INTO login_details (Email, Password, Role) VALUES (?, ?, ?)");
-        $stmt->bind_param("sss", $email, $hashedPassword, $role);
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    // Query to fetch user details based on sanitized email
+    $result = mysqli_query($conn, "SELECT * FROM userdetails WHERE email = '$email'");
+
+    if (mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
         
-        if ($stmt->execute()) {
-            echo "Login information saved successfully.";
-            $isloged = true;
-            
+        // Compare passwords (Note: password is still plain text here)
+        if ($password == $row['password']) {
+
+            $_SESSION['login'] = true;
+            $_SESSION['user_id'] = $row["user_id"]; // Assuming 'user_id' is the field name
+
+            // Insert the login attempt into the login table
+            $loginInsert = "INSERT INTO login (email, password) VALUES ('$email', '{$row['password']}')";
+            mysqli_query($conn, $loginInsert);
+
+            header("Location: view.php");
         } else {
-            echo "Error: " . $stmt->error;
+            echo "<script>alert('Wrong Password')</script>";
         }
-        
-        $stmt->close();
+    } else {
+        echo "<script>alert('Username has not registered')</script>";
     }
-    $checkUser->close();
 }
 
 $conn->close();
-
 ?>
-  <!-- Main Content -->
-    <main id="main" class="main">
-      <div class="container d-flex align-items-center justify-content-center " style="min-height: 80vh;">
-        <div class=" card p-4 shadow " style="max-width: 400px; width: 100%; margin-top: 12vh;">
-          <h2 class="text-center mb-4">Member Login</h2>
-          <form action="#" method="POST">
-            <div class="mb-3">
-              <label for="email" class="form-label">Email</label>
-              <input type="email" id="email" name="email" class="form-control" required>
-            </div>
-            <div class="mb-3">
-              <label for="password" class="form-label">Password</label>
-              <input type="password" id="password" name="password" class="form-control" required>
-            </div>
-            <div class="d-grid">
-              <button type="submit" class="btn btn-primary">Login</button>
-            </div>
-            <div class="mt-3 text-center">
-              <p>Don't have an account? <a href="register.php">Register here</a></p>
-            </div>
-          </form>
-          <?php if ($isloged): ?>
-            <div class="alert alert-success mt-4 text-center ">
-                Logged Successfully!
-            </div>
+
+<!-- Main Content -->
+<main id="main" class="main">
+    <div class="container d-flex align-items-center justify-content-center" style="min-height: 80vh;">
+        <div class="card p-4 shadow" style="max-width: 400px; width: 100%; margin-top: 12vh;">
+            <h2 class="text-center mb-4">Member Login</h2>
+            <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="POST">
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" id="email" name="email" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" id="password" name="password" class="form-control" required>
+                </div>
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </div>
+                <div class="mt-3 text-center">
+                    <p>Don't have an account? <a href="register.php">Register here</a></p>
+                </div>
+            </form>
+
+            <?php if ($isLogged): ?>
+                <div class="alert alert-success mt-4 text-center">
+                    Logged in successfully!
+                </div>
             <?php endif; ?>
         </div>
-      </div>
-    </main>
+    </div>
+</main>
+
+
+
 
   <!-- Footer -->
   <footer id="footer" class="footer light-background">
@@ -184,7 +184,6 @@ $conn->close();
     <div class="container copyright text-center mt-4">
       <p>© <span>Copyright</span> <strong class="px-1 sitename">FitLife</strong> <span>All Rights Reserved</span></p>
       <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
         Designed by <a href="#">Team FitLife</a>
       </div>
     </div>

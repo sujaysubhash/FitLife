@@ -28,6 +28,55 @@
 
 </head>
 
+<?php
+session_start(); // Start a session to store user data after login
+// Database connection
+$servername = "localhost";
+$username = "admin";
+$password = "admin";
+$dbname = "fitlife";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+$email = $password = "";
+$emailErr = $passwordErr = "";
+
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    // Query to fetch user details based on sanitized email
+    $result = mysqli_query($conn, "SELECT * FROM userdetails WHERE email = '$email'");
+
+    if (mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        
+        // Compare passwords (Note: password is still plain text here)
+        if ($password == $row['password']) {
+
+            $_SESSION['login'] = true;
+            $_SESSION['user_id'] = $row["user_id"]; // Assuming 'user_id' is the field name
+
+            // Insert the login attempt into the login table
+            $loginInsert = "INSERT INTO login (email, password) VALUES ('$email', '{$row['password']}')";
+            mysqli_query($conn, $loginInsert);
+
+            header("Location: view.php");
+        } else {
+            echo "<script>alert('Wrong Password')</script>";
+        }
+    } else {
+        echo "<script>alert('Username has not registered')</script>";
+    }
+}
+
+$conn->close();
+?>
+
 <body class="index-page">
       <header id="header" class="header d-flex align-items-center fixed-top">
         <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
@@ -53,7 +102,7 @@
       <div class="container d-flex align-items-center justify-content-center " style="min-height: 80vh;">
         <div class=" card p-4 shadow " style="max-width: 400px; width: 100%; margin-top: 12vh;">
           <h2 class="text-center mb-4">Guest Login</h2>
-          <form action="#" method="POST">
+          <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
             <div class="mb-3">
               <label for="email" class="form-label">Email</label>
               <input type="email" id="email" name="email" class="form-control" required>

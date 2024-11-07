@@ -49,47 +49,88 @@
           </div>
       </header>
 <?php
-    $servername = "localhost";
-    $username = "admin"; 
-    $password = "admin"; 
-    $dbname = "fitlife"; 
-    
-    // Create connection
-        $conn = new mysqli($servername, $username, $password, $dbname);
-    
-    // Check connection
-        if ($conn->connect_error)
-        {
-            die("Connection failed: " . $conn->connect_error);
-        }
+session_start(); // Start the session
 
-        $query = 'SELECT name, email,'
+// Database connection
+$servername = "localhost";
+$username = "admin";
+$password = "admin";
+$dbname = "fitlife";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+$name = $email = $fitness_objective = $BMi = $weight = $height = $dietary_restrictions= "";
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Check if the user is logged in
+if (isset($_SESSION['login']) && $_SESSION['login'] === true) {
+    // Get user ID from session
+    $user_id = $_SESSION['user_id'];
+
+    // Query to fetch user details from the database
+$query = "SELECT bmi, weight, height, dietary_restrictions, Fitness_objective FROM profiledetails";
+$result = $conn->query($query);
+
+$query1 = "SELECT name, email FROM userdetails";
+$result1 = $conn->query($query1);
+
+// Fetch user details
+if($result1->num_rows > 0) {
+    $row1 = $result1->fetch_assoc();
+    $name = $row1['name'];
+    $email = $row1['email'];
+} else {
+    echo "No user data found.";
+}
+
+// Fetch profile details
+if ($result->num_rows > 0) {
+    // Fetch the user's profile data
+    $row = $result->fetch_assoc();
+
+    // Assign variables for displaying
+    $fitness_objective = html_entity_decode($row['Fitness_objective']); 
+    $BMI = $row['bmi'];
+    $weight = $row['weight'];
+    $height = $row['height'];
+    $dietary_restrictions = $row['dietary_restrictions'];
+
+} else {
+    echo "No profile data found.";
+}
+} else {
+    // Redirect to login page if not logged in
+    header("Location: admin-login.php");
+    exit();
+}
 ?>
 
-  <!-- Main Content -->
-  <main id="main" class="main">
-    <div class="container py-5" style="margin-top: 80px;">
-      <div class="profile-container card p-4 shadow" style="max-width: 600px; margin: auto;">
-        <h2 class="text-center mb-4">Your Profile</h2>
-        
-        <!-- Profile Information Section -->
-        <div class="profile-info">
-          <p><strong>Name:</strong> John Doe</p>
-          <p><strong>Email:</strong> johndoe@example.com</p>
-          <p><strong>Fitness Objective:</strong> Weight Loss</p>
-          <p><strong>BMI:</strong> 23.4</p>
-          <p><strong>Weight:</strong> 70 kg</p>
-          <p><strong>Height:</strong> 175 cm</p>
-          <p><strong>Dietary Restrictions:</strong> Vegetarian</p>
-        </div>
+<!-- Main Content -->
+<main id="main" class="main">
+  <div class="container py-5" style="margin-top: 80px;">
+    <div class="profile-container card p-4 shadow" style="max-width: 600px; margin: auto;">
+      <h2 class="text-center mb-4">Your Profile</h2>
+      
+      <!-- Profile Information Section -->
+      <div class="profile-info">
+        <p><strong>Name:</strong> <?php echo htmlspecialchars($name); ?></p>
+        <p><strong>Email:</strong> <?php echo htmlspecialchars($email); ?></p>
+        <p><strong>Fitness Objective:</strong> <?php echo $fitness_objective; ?></p> 
+        <p><strong>BMI:</strong> <?php echo htmlspecialchars($BMI); ?></p>
+        <p><strong>Weight:</strong> <?php echo htmlspecialchars($weight); ?> kg</p>
+        <p><strong>Height:</strong> <?php echo htmlspecialchars($height); ?> cm</p>
+        <p><strong>Dietary Restrictions:</strong> <?php echo htmlspecialchars($dietary_restrictions); ?></p>
+      </div>
 
-        <!-- Edit Profile Link -->
-        <div class="text-center mt-4">
-          <a href="edit-profile.php" class="btn btn-primary">Edit Profile</a>
-        </div>
+      <!-- Edit Profile Link -->
+      <div class="text-center mt-4">
+        <a href="edit-profile.php" class="btn btn-primary">Edit Profile</a>
       </div>
     </div>
-  </main>
+  </div>
+</main>
   
 <!-- footer  -->
   <footer id="footer" class="footer light-background">

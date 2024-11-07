@@ -153,17 +153,19 @@ $dbname = "fitlife";
             $isRegistered = true; // Set success flag
         }
 
-        $stmt = $conn->prepare("INSERT INTO userdetails (role, name, email, password, address) VALUES (?, ?, ?, ?, ?)");
-        $role = "guest"; 
-        $stmt->bind_param("sssss", $role, $name, $email, $password, $address);
-       
-        if ($stmt->execute()) {
+
+        $role = "guest"; // Assuming all registered users are regular users
+
+        // Insert user details into the userdetails table
+        $userInsert = "INSERT INTO userdetails (role, name, email, password, address) VALUES ('$role', '$name', '$email', '$password', '$address')";
+
+
+        if (mysqli_query($conn, $userInsert)) {
             $isRegistered = true;
         } else {
-            echo "Error: " . $stmt->error;
+            echo "Error: " . mysqli_error($conn);
         }
-
-        $stmt->close(); // Close prepared statement
+        
     }
 
     function test_input($data) {
@@ -172,6 +174,9 @@ $dbname = "fitlife";
         $data = htmlspecialchars($data);
         return $data;
     }
+
+    $conn->close();
+
 ?>
 
 

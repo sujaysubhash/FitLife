@@ -60,7 +60,7 @@
             </ul>
           </li>
           <li><a href="shop.php">Shop</a></li>
-          <li><a href="about.php">About</a></li>
+          <li><a href="about.php" class="active">About</a></li>
           <li><a href="community.php">Community</a></li>
           <li><a href="support.php">Support</a></li>
         </ul>

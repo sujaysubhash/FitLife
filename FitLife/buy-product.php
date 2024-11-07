@@ -74,58 +74,145 @@
       </nav>
     </div>
   </header>
-<!--end header -->
 
-<main style ="margin-block-start: 50px;">
+  <?php
+// Include database connection file
+$servername = "localhost";
+$username = "admin"; 
+$password = "admin"; 
+$dbname = "fitlife"; 
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  // Get the form data
+  if (isset($_POST['quantity'])) {
+      $quantity = $_POST['quantity'];
+  } else {
+      echo "Quantity not provided!";
+      exit;  // Exit if quantity is not provided
+  }
+  
+  // Fetch product_id from the database (for this example, based on product_name)
+  if (isset($_POST['product_name'])) {
+      $product_name = $_POST['product_name']; // Assuming product_name is submitted via POST
+ 
+      // Fetch the product_id based on product_name
+      $query = "SELECT product_id FROM productdetails WHERE product_name = ?";
+      $stmt = $conn->prepare($query);
+      $stmt->bind_param("s", $product_name);
+      $stmt->execute();
+      $result = $stmt->get_result();
+
+      if ($result->num_rows > 0) {
+          $row = $result->fetch_assoc();
+          $product_id = $row['product_id'];  // Get the product_id
+      } else {
+          echo "Product not found!";
+          exit;  // Exit if the product is not found
+      }
+  } else {
+      echo "Product Name not provided!";
+      exit;  // Exit if product_name is not provided
+  }
+
+  // Assume user_id is obtained from session or elsewhere (for this example, hardcoded)
+  session_start();
+  $user_id = $_SESSION['user_id']; // Assuming user_id is stored in the session
+
+  // Calculate the price based on the selected product (fetch price from database)
+  $price_query = "SELECT price FROM productdetails WHERE product_id = ?";
+  $price_stmt = $conn->prepare($price_query);
+  $price_stmt->bind_param("i", $product_id);
+  $price_stmt->execute();
+  $price_result = $price_stmt->get_result();
+
+  if ($price_result->num_rows > 0) {
+      $price_row = $price_result->fetch_assoc();
+      $price = $price_row['price']; // Get the price
+  } else {
+      echo "Price not found for the selected product!";
+      exit;  // Exit if price is not found
+  }
+
+  // Get the current date for the order
+  $order_date = date("Y-m-d");
+
+  // Insert the order into the orderdetails table
+  $insert_query = "INSERT INTO orderdetails (user_id, product_id, order_date, quantity, price) 
+                   VALUES (?, ?, ?, ?, ?)";
+  $insert_stmt = $conn->prepare($insert_query);
+  $insert_stmt->bind_param("iiisi", $user_id, $product_id, $order_date, $quantity, $price);
+
+  if ($insert_stmt->execute()) {
+      echo "Order placed successfully!";
+  } else {
+      echo "Error placing order: " . $insert_stmt->error;
+  }
+
+  // Close the database connection
+  $stmt->close();
+  $price_stmt->close();
+  $insert_stmt->close();
+  $conn->close();
+}
+?>
+
+<main style="margin-block-start: 50px;">
     <section class="register-area">
-            <div class="container">
-                <div class="join">
-                    <h1 class=" join-head text-center">Order Summary</h1>
-                </div>
-                <form method="POST" action="./ordered.php" onsubmit="return validateForm()">
-                    <div class="form-group">
-                        <label for="name">Name:</label>
-                        <input id="name" type="text" name="name" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email:</label>
-                        <input id="email" type="email" name="email" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="phone">Phone:</label>
-                        <input id="phone" type="number" name="phone" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="address">Address:</label>
-                        <input id="address" type="text" name="address" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="pincode">Pincode:</label>
-                        <input id="pincode" type="number" name="pincode" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="housenumber">House Number:</label>
-                        <input id="housenumber" type="number" name="housenumber" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="landmark">Landmark:</label>
-                        <input id="landmark" type="text" name="landmark" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="addresstype">Address Type:</label>
-                        <select name="addresstype" class="form-control">
-                            <option value="">Select</option>
-                            <option value="Home" >Home</option>
-                            <option value="Work" >Work</option>
-                        </select>
-                    </div>
-                    <div>
-                        <input type="submit" name="submit" value="Place Order" class="btn btn-primary">
-                    </div>
-                </form>
-            </div>
+      <div class="container">
+        <div class="join">
+          <h1 class="join-head text-center">Order Summary</h1>
+        </div>
+        <form method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ?>" onsubmit="return validateForm()">
+          <div class="form-group">
+            <label for="name">Name:</label>
+            <input id="name" type="text" name="name" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input id="email" type="email" name="email" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone:</label>
+            <input id="phone" type="number" name="phone" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="address">Address:</label>
+            <input id="address" type="text" name="address" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="quantity">Quantity:</label>
+            <input id="quantity" type="number" name="quantity" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="pincode">Pincode:</label>
+            <input id="pincode" type="number" name="pincode" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="housenumber">House Number:</label>
+            <input id="housenumber" type="number" name="housenumber" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="landmark">Landmark:</label>
+            <input id="landmark" type="text" name="landmark" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="addresstype">Address Type:</label>
+            <select name="addresstype" class="form-control">
+              <option value="">Select</option>
+              <option value="Home">Home</option>
+              <option value="Work">Work</option>
+            </select>
+          </div>
+          <div>
+            <input type="submit" name="submit" value="Place Order" class="btn btn-primary">
+          </div>
+        </form>
+      </div>
     </section>
-</main>
+  </main>
 
 <!-- footer section -->
 <footer id="footer" class="footer light-background">

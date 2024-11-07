@@ -99,6 +99,21 @@
     </header>
 
     <?php
+    session_start();
+
+    $servername = "localhost";
+    $username = "admin"; 
+    $password = "admin"; 
+    $dbname = "fitlife"; 
+    
+    // Create connection
+        $conn = new mysqli($servername, $username, $password, $dbname);
+    
+    // Check connection
+        if ($conn->connect_error)
+        {
+            die("Connection failed: " . $conn->connect_error);
+        }
     // PHP Code for Registration Form Handling
     $nameErr = $emailErr = $passwordErr = $heightErr = $weightErr = "";
     $name = $email = $password = $height = $weight = $category = "";
@@ -191,6 +206,38 @@
                     <li>Limit Sugary Drinks: Reduce soda and high-calorie beverages.</li>
                 </ul>";
             }
+
+            $user_id = $_SESSION['user_id'];
+            $userQuery = "SELECT * FROM userdetails WHERE user_id = '$user_id'";
+            $userResult = $conn->query($userQuery);
+
+            if ($userResult->num_rows > 0) {
+                // If the user exists, update their profile details
+                $profileUpdate = "UPDATE profiledetails SET bmi = '$bmi', weight = '$weight', height = '$height', dietary_restrictions = '$category', last_modified_date = CURDATE(), Fitness_objective = '$recommendations' WHERE user_id = '$user_id'";
+    
+                if ($conn->query($profileUpdate) === TRUE) {
+                    echo "<script>alert('Profile updated successfully');</script>";
+                } else {
+                    echo "Error updating profile: " . $conn->error;
+                }
+            } else {
+                // If the user doesn't exist, insert new user details and profile details
+                $userInsert = "INSERT INTO userdetails (role, name, email, password) VALUES ('user', '$name', '$email', '$password')";
+                $conn->query($userInsert);
+    
+                // Get the new user's ID (last inserted user ID)
+                $user_id = $conn->insert_id;
+    
+                // Insert profile details
+                $profileInsert = "INSERT INTO profiledetails (user_id, bmi, weight, height, dietary_restrictions, last_modified_date, Fitness_objective) VALUES ('$user_id', '$bmi', '$weight', '$height', '$category', CURDATE(), '$recommendations')";
+                if ($conn->query($profileInsert) === TRUE) {
+                    echo "<script>alert('Profile created successfully');</script>";
+                } else {
+                    echo "Error inserting profile: " . $conn->error;
+                }
+            }
+            $conn->close();
+
         }
     }
 
@@ -210,7 +257,7 @@
             <h1 class="join-head">Join FitLife</h1>
         </div>
         <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-            <div class="form-group">
+        <div class="form-group">
                 <label for="height">Height (cm):</label>
                 <input type="number" name="height" class="form-control" value="<?php echo $height;?>" step="1" min="0" max="300">
                 <span class="error"><?php echo $heightErr;?></span>

@@ -70,69 +70,53 @@
 
     </div>
   </header>
-
-  <?php
+<?php
+session_start(); // Start a session to store user data after login
+// Database connection
 $servername = "localhost";
-$username = "admin"; 
-$password = "admin"; 
-$dbname = "fitlife"; 
+$username = "admin";
+$password = "admin";
+$dbname = "fitlife";
 
-// Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-
-// Define variables and initialize with empty values
 $email = $password = "";
 $emailErr = $passwordErr = "";
 
-// Check if the form was submitted
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if (empty($_POST['email'])) {
-        $emailErr = "Enter your email address";
-    } else {
-        $email = test_input($_POST['email']);
-    }
+    $email = $_POST['email'];
+    $password = $_POST['password'];
 
-    if (empty($_POST['password'])) {
-        $passwordErr = "Enter your password";
-    } else {
-        $password = test_input($_POST['password']);
-    }
+    // Query to fetch user details based on sanitized email
+    $result = mysqli_query($conn, "SELECT * FROM userdetails WHERE email = '$email'");
 
-    // Sanitize and validate inputs
-    function test_input($data) {
-        $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
-        return $data;
-    }
+    if (mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        
+        // Compare passwords (Note: password is still plain text here)
+        if ($password == $row['password']) {
 
-    // Check if there are no errors
-    if (empty($emailErr) && empty($passwordErr)) {
-        $role = "Admin"; // Set role to Admin, you can adjust based on form input
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT); // Hash the password
+            $_SESSION['login'] = true;
+            $_SESSION['user_id'] = $row["user_id"]; // Assuming 'user_id' is the field name
 
-        // Prepare the insert statement
-        $stmt = $conn->prepare("INSERT INTO login_details (Email, Password, Role) VALUES (?, ?, ?)");
-        if ($stmt === false) {
-            die("Error in preparing statement: " . $conn->error);
-        }
-        $stmt->bind_param("sss", $email, $hashedPassword, $role);
+            // Insert the login attempt into the login table
+            $loginInsert = "INSERT INTO login (email, password) VALUES ('$email', '{$row['password']}')";
+            mysqli_query($conn, $loginInsert);
 
-        if ($stmt->execute()) {
-            echo "<p>Registration successful!</p>";
+            header("Location: view.php");
         } else {
-            echo "<p>Error: " . $stmt->error . "</p>";
+            echo "<script>alert('Wrong Password')</script>";
         }
-
-        $stmt->close(); // Close prepared statement
+    } else {
+        echo "<script>alert('Username has not registered')</script>";
     }
 }
-$conn->close();  // Close database connection
+
+$conn->close();
 ?>
 
 

@@ -68,34 +68,72 @@
           </div>
       </header>
   <!-- main -->
+  <?php
+// Database connection
+$servername = "localhost";
+$username = "admin"; 
+$password = "admin"; 
+$dbname = "fitlife"; 
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+} else {
+    // Check if order_id is passed in the URL
+    if (isset($_GET['order_id']) && is_numeric($_GET['order_id'])) {
+        $order_id = $_GET['order_id'];
+
+        // Query to fetch specific order details
+        $query = "SELECT p.product_id, p.product_name, p.description, p.price, 
+                         o.order_id, o.quantity, o.price AS order_price, o.order_date
+                  FROM productdetails p
+                  JOIN orderdetails o ON p.product_id = o.product_id
+                  WHERE o.order_id = $order_id LIMIT 1";  // Only fetch one order
+
+        $result = mysqli_query($conn, $query);
+
+        if (mysqli_num_rows($result) > 0) {
+            $row = mysqli_fetch_assoc($result);
+        } else {
+            echo "<p>No order found with that ID.</p>";
+            exit;
+        }
+    } else {
+        echo "<p>No valid order specified.</p>";
+        exit;
+    }
+}
+?>
+
 <main>
-    <div class="content-container container" style="margin-top:8rem; margin-bottom:3rem;">
-        <div>
-            <h1 class="success-message">Order Placed Successfully!</h1>
-            <p>Thankyou for your order! Your order has been placed successfully</p>
-        </div>
-        <div>
-            <h4>Order Details:</h4>
-            <div class="order-details">
-                <p><strong>Product Name:</strong>[product name]</p>
-                <p><strong>Quantity:</strong>[product quantity]</p>
-                <p><strong>Total Amount:</strong>$[amount]</p>
-                <p><strong>Order ID:</strong>[order id]</p>
-                <p><strong>Shipping Address:</strong></p>
-                <p>[User name]</p>
-                <p>[Address]</p>
-                <p>[City, State, Pin]</p>
+        <h1>Product and Order Details</h1>
+
+        <?php
+        // If order details are fetched successfully, display them
+        if (isset($row)) {
+            echo "<div class='product-order'>";
+            echo "<h3>Product: " . htmlspecialchars($row['product_name']) . "</h3>";
+            echo "<p>Description: " . htmlspecialchars($row['description']) . "</p>";
+            echo "<p>Price: $" . number_format($row['price'], 2) . "</p>";
+            echo "<h4>Order Details:</h4>";
+            echo "<p>Order ID: " . htmlspecialchars($row['order_id']) . "</p>";
+            echo "<p>Quantity: " . htmlspecialchars($row['quantity']) . "</p>";
+            echo "<p>Price (for the order): $" . number_format($row['order_price'], 2) . "</p>";
+            echo "<p>Order Date: " . htmlspecialchars($row['order_date']) . "</p>";
+            echo "</div>";
+        }
+        ?>
+    </main>
+
             </div>
-        <div class="text-center">
-            <a href="index.php" class="btn btn-primary">Return to Home</a>
-            <a href="shop.php" class="btn btn-secondary">Continue Shopping</a>
+          </div>
         </div>
+      </div>
     </div>
-
-    </div>
-</main>
-
-<!-- end main -->
+  </main>
 
 <!-- footer -->
 <footer id="footer" class="footer light-background">
